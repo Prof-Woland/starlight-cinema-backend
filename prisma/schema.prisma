@@ -33,7 +33,7 @@ datasource db {
 model User{
   id String @id @unique @default(uuid())
 
-  login String @unique()
+  login String
   password String
 
   createdAt DateTime @map("created_at") @default(now())

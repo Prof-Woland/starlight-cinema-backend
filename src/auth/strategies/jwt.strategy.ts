@@ -28,7 +28,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         const jwtToken = this.extractor(request);
         if(jwtToken){
             return await this.authService.validate(
-                payload.login, 
+                payload.id, 
                 jwtToken
             );
         }

@@ -52,7 +52,7 @@ export class AuthService {
                 password: await hash(password)
             }
         });
-        const tokens = this.generateTokens(newUser.login);
+        const tokens = this.generateTokens(newUser.id);
 
         await this.cachingTokens(newUser.id, tokens.accessToken, tokens.refreshToken)
         
@@ -85,7 +85,7 @@ export class AuthService {
             this.logger.warn(`False password: ${login}`, this.name);
             throw new NotFoundException('Неверный пароль');
         };
-        const tokens = this.generateTokens(login);
+        const tokens = this.generateTokens(extendUser.id);
 
         try{
             await this.cacheManager.del(`${extendUser.id + 'at'}`)
@@ -98,8 +98,7 @@ export class AuthService {
 
         this.logger.log(`Successful authorization: ${login}`, this.name);
 
-        const avatar = await this.getAvatar(extendUser.id);
-        return {...tokens, "uri": avatar?.toString()}
+        return {...tokens}
     }
 
     async refresh(dto: RefreshDto, user: User){
@@ -135,33 +134,26 @@ export class AuthService {
             throw new ForbiddenException('Скомпрометированный токен обновления')
         }
 
-        const tokens = this.generateTokens(payload.login)
+        const tokens = this.generateTokens(payload.id)
         try{
             await this.cacheManager.del(`${user.id + 'at'}`)
             await this.cacheManager.del(`${user.id + 'rt'}`)
             await this.cachingTokens(user.id, tokens.accessToken, tokens.refreshToken)
         }
         catch(InternalServerErrorException){
-            this.logger.warn(`Failed to update tokens: ${payload.login}`, this.name)
+            this.logger.warn(`Failed to update tokens: ${payload.id}`, this.name)
         }
 
-        const avatar = await this.getAvatar(user.id)
         this.logger.log(`Successful refresh`, this.name);
 
-        return {...tokens, "uri": avatar?.toString()}
+        return {...tokens}
     }
 
-    async validate(login: string, token: string){
+    async validate(id: string, token: string){
         const user = await this.prismaService.user.findUnique({
             where: {
-                login
+                id
             },
-            select:{
-                id: true,
-                goals: true,
-                plans: true,
-                avatar: true,
-            }
         });
 
         if(!user){
@@ -175,24 +167,8 @@ export class AuthService {
         return user
     }
 
-    async getAvatar(id: string) {
-        const avatar = await this.prismaService.avatar.findUnique({
-            where:{
-                userId: id
-            },
-            select:{
-                avatarPath: true,
-            }
-        })
-
-        if(!avatar){
-            return null
-        }
-        return avatar.avatarPath
-    }
-
-    private generateTokens(login: string){
-        const payload: JwtPayload = {login};
+    private generateTokens(id: string){
+        const payload: JwtPayload = {id};
 
         const accessToken = this.jwtService.sign(payload, {expiresIn: this.JWT_ACCESS_TOKEN_TTL, secret: this.JWT_SECRET});
         const refreshToken = this.jwtService.sign(payload, {expiresIn: this.JWT_REFRESH_TOKEN_TTL, secret: this.JWT_SECRET});
