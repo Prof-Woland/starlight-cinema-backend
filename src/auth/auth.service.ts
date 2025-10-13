@@ -32,13 +32,10 @@ export class AuthService {
         const {login, password} = dto;
         this.logger.log(`Registration request: ${login}`, this.name);
 
-        const user = await this.prismaService.user.findUnique({
+        const user = await this.prismaService.user.findFirst({
             where:{
                 login
             },
-            select:{
-                id: true
-            }
         });
 
         if(user){
@@ -64,7 +61,7 @@ export class AuthService {
         const {login, password} = dto;
         this.logger.log(`Authorization request: ${login}`, this.name);
 
-        const extendUser = await this.prismaService.user.findUnique({
+        const extendUser = await this.prismaService.user.findFirst({
             where: {
                 login
             },
