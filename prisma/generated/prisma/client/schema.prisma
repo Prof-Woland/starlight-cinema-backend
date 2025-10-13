@@ -15,20 +15,20 @@ datasource db {
   url      = env("POSTGRES_URL")
 }
 
-enum Categories {
-  STORE_AND_HOUSEHOLD
-  COSMETICS
-  TRANSPORT
-  HOUSING_AND_COMMUNAL_SERVICES
-  HEALTH
-  INTERNET
-  HOBBY
-  LOANS
-  CLOTH
-  UNFORESSEN_EXPENSES
-  AIRBAG
-  ADDITIONAL_EXPENSES
-}
+// enum Categories{
+//   STORE_AND_HOUSEHOLD
+//   COSMETICS
+//   TRANSPORT
+//   HOUSING_AND_COMMUNAL_SERVICES
+//   HEALTH
+//   INTERNET
+//   HOBBY
+//   LOANS
+//   CLOTH
+//   UNFORESSEN_EXPENSES
+//   AIRBAG
+//   ADDITIONAL_EXPENSES
+// }
 
 model User {
   id String @id @unique @default(uuid())
@@ -36,78 +36,8 @@ model User {
   login    String @unique()
   password String
 
-  goals  Goal[]
-  plans  Plan[]
-  // tokens Auth?
-  avatar Avatar?
-
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("users")
-}
-
-model Goal {
-  id String @id @unique @default(uuid())
-
-  userId String @map("user_id")
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  title      String
-  date       String
-  savedMoney Float  @default(0) @map("saved_money")
-  allMoney   Float  @map("all_money")
-
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-
-  @@map("goals")
-}
-
-model Plan {
-  id String @id @unique
-
-  userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  title      String
-  date       String
-  spentMoney Float  @default(0) @map("spent_money")
-  limitMoney Float  @map("limit_money")
-  remainder  Float
-
-  analysis        String
-  recommendations String[]
-
-  budgetPlan Json
-
-  term String
-
-  expenses Expenses[]
-
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-}
-
-model Avatar {
-  id     String @id @unique @default(uuid())
-  userId String @unique @map("user_id")
-  user   User   @relation(fields: [userId], references: [id])
-
-  avatarPath String
-
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-}
-
-model Expenses {
-  id String @id @unique @default(uuid())
-
-  planId String @map("plan_id")
-  plan   Plan   @relation(fields: [planId], references: [id], onDelete: Cascade)
-
-  category String
-  expense  Decimal
-
-  createdAt DateTime @default(now()) @map("created_at")
 }

@@ -128,56 +128,9 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.GoalScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  title: 'title',
-  date: 'date',
-  savedMoney: 'savedMoney',
-  allMoney: 'allMoney',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.PlanScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  title: 'title',
-  date: 'date',
-  spentMoney: 'spentMoney',
-  limitMoney: 'limitMoney',
-  remainder: 'remainder',
-  analysis: 'analysis',
-  recommendations: 'recommendations',
-  budgetPlan: 'budgetPlan',
-  term: 'term',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.AvatarScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  avatarPath: 'avatarPath',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.ExpensesScalarFieldEnum = {
-  id: 'id',
-  planId: 'planId',
-  category: 'category',
-  expense: 'expense',
-  createdAt: 'createdAt'
-};
-
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
-};
-
-exports.Prisma.JsonNullValueInput = {
-  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -185,19 +138,9 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
-exports.Prisma.JsonNullValueFilter = {
-  DbNull: Prisma.DbNull,
-  JsonNull: Prisma.JsonNull,
-  AnyNull: Prisma.AnyNull
-};
-
 
 exports.Prisma.ModelName = {
-  User: 'User',
-  Goal: 'Goal',
-  Plan: 'Plan',
-  Avatar: 'Avatar',
-  Expenses: 'Expenses'
+  User: 'User'
 };
 
 /**
