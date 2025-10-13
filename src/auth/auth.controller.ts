@@ -35,7 +35,7 @@ export class AuthController {
   @ApiOkResponse({type: RefreshDto})
   @Post('refresh')
   @HttpCode(HttpStatus.OK)
-  async refresh(@Body() dto: RefreshDto, @Authorized() user: User){
-    return this.authService.refresh(dto, user)
+  async refresh(@Body() dto: RefreshDto){
+    return this.authService.refresh(dto)
   }
 }

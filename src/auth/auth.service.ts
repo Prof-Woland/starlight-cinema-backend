@@ -98,7 +98,7 @@ export class AuthService {
         return {...tokens}
     }
 
-    async refresh(dto: RefreshDto, user: User){
+    async refresh(dto: RefreshDto){
         const refreshT = dto.refreshToken;
 
         this.logger.log(`Refresh request`, this.name);
@@ -124,7 +124,7 @@ export class AuthService {
             throw new ForbiddenException('Неверный ключ токена обновления');
         }
 
-        const exist = await this.getCacheTokens(user.id)
+        const exist = await this.getCacheTokens(payload.id)
 
         if(refreshT != exist?.refreshToken){
             this.logger.log(`Wrong refresh token`, this.name);
@@ -133,9 +133,9 @@ export class AuthService {
 
         const tokens = this.generateTokens(payload.id)
         try{
-            await this.cacheManager.del(`${user.id + 'at'}`)
-            await this.cacheManager.del(`${user.id + 'rt'}`)
-            await this.cachingTokens(user.id, tokens.accessToken, tokens.refreshToken)
+            await this.cacheManager.del(`${payload.id + 'at'}`)
+            await this.cacheManager.del(`${payload.id + 'rt'}`)
+            await this.cachingTokens(payload.id, tokens.accessToken, tokens.refreshToken)
         }
         catch(InternalServerErrorException){
             this.logger.warn(`Failed to update tokens: ${payload.id}`, this.name)
