@@ -49,7 +49,7 @@ export class AuthService {
                 password: await hash(password)
             }
         });
-        const tokens = this.generateTokens(newUser.id);
+        const tokens = this.generateTokens(newUser.id, newUser.login);
 
         await this.cachingTokens(newUser.id, tokens.accessToken, tokens.refreshToken)
         
@@ -66,6 +66,7 @@ export class AuthService {
                 login
             },
             select:{
+                login: true,
                 password: true,
                 id: true
             }
@@ -82,7 +83,7 @@ export class AuthService {
             this.logger.warn(`False password: ${login}`, this.name);
             throw new NotFoundException('Неверный пароль');
         };
-        const tokens = this.generateTokens(extendUser.id);
+        const tokens = this.generateTokens(extendUser.id, extendUser.login);
 
         try{
             await this.cacheManager.del(`${extendUser.id + 'at'}`)
@@ -131,7 +132,7 @@ export class AuthService {
             throw new ForbiddenException('Скомпрометированный токен обновления')
         }
 
-        const tokens = this.generateTokens(payload.id)
+        const tokens = this.generateTokens(payload.id, payload.login)
         try{
             await this.cacheManager.del(`${payload.id + 'at'}`)
             await this.cacheManager.del(`${payload.id + 'rt'}`)
@@ -164,8 +165,8 @@ export class AuthService {
         return user
     }
 
-    private generateTokens(id: string){
-        const payload: JwtPayload = {id};
+    private generateTokens(id: string, login: string){
+        const payload: JwtPayload = {id, login};
 
         const accessToken = this.jwtService.sign(payload, {expiresIn: this.JWT_ACCESS_TOKEN_TTL, secret: this.JWT_SECRET});
         const refreshToken = this.jwtService.sign(payload, {expiresIn: this.JWT_REFRESH_TOKEN_TTL, secret: this.JWT_SECRET});
