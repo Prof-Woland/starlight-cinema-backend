@@ -2,6 +2,7 @@ import { Controller, Get } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import { ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { OkDto } from './dto/movieOk.dto';
+import { Authorization } from 'src/auth/decorators/authorization.decorator';
 
 @Controller('movies')
 export class MoviesController {
@@ -12,6 +13,7 @@ export class MoviesController {
     })
   @ApiOkResponse({type: OkDto})
   @Get()
+  @Authorization()
   async getAll(){
       return await this.moviesService.getMovies()
   }
