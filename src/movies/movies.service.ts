@@ -20,10 +20,10 @@ export class MoviesService {
         method: "GET",
         headers: {"X-API-KEY":this.API_KEY},
         });
-        if(!allResponse.ok){
-            this.logger.warn('Error with allUrl response', this.name);
-            throw new InternalServerErrorException('Error with allUrl response')
-        }
+        // if(!allResponse.ok){
+        //     this.logger.warn('Error with allUrl response', this.name);
+        //     throw new InternalServerErrorException('Error with allUrl response')
+        // }
         const allData = await this.necessaryData(await allResponse.json());
 
         const oneUrl = 'https://api.kinopoisk.dev/v1.4/movie?page=1&limit=1&type=movie&year=2025-2026&rating.kp=8-10&audience.count=10000-999999999999999';
@@ -31,10 +31,10 @@ export class MoviesService {
         method: "GET",
         headers: {"X-API-KEY":this.API_KEY},
         });
-        if(!oneResponse.ok){
-            this.logger.warn('Error with oneUrl response', this.name);
-            throw new InternalServerErrorException('Error with oneUrl response')
-        }
+        // if(!oneResponse.ok){
+        //     this.logger.warn('Error with oneUrl response', this.name);
+        //     throw new InternalServerErrorException('Error with oneUrl response')
+        // }
         const oneData = await this.necessaryData(await oneResponse.json());
 
         const popularUrl = 'https://api.kinopoisk.dev/v1.4/movie?page=1&limit=20&type=movie&year=2010-2025&rating.kp=8-10&audience.count=10000-999999999999999';
@@ -42,10 +42,10 @@ export class MoviesService {
         method: "GET",
         headers: {"X-API-KEY":this.API_KEY},
         });
-        if(!popularResponse.ok){
-            this.logger.warn('Error with popularUrl response', this.name);
-            throw new InternalServerErrorException('Error with popularUrl response')
-        }
+        // if(!popularResponse.ok){
+        //     this.logger.warn('Error with popularUrl response', this.name);
+        //     throw new InternalServerErrorException('Error with popularUrl response')
+        // }
         const popularData = await this.necessaryData(await popularResponse.json());
         this.logger.log('Successful!', this.name)
         return {main: oneData, popular: popularData, all: allData}
