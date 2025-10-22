@@ -41,3 +41,23 @@ model User {
 
   @@map("users")
 }
+
+model Movie {
+  id Int @id @unique()
+
+  name String
+
+  description String
+  rating      Decimal
+
+  movieLength Int
+
+  ageRating Int
+
+  genres String[]
+
+  poster String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+}

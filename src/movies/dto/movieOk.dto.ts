@@ -35,3 +35,61 @@ export class OkDto{
     @IsNotEmpty({message: 'Значение не должно быть пустым'})
     all: [];
 }
+
+export class OkOneDto{
+    @ApiProperty({
+      title: "ID фильма",
+      example: `7605663`
+    })
+    @IsNotEmpty({message: 'Значение не должно быть пустым'})
+    id: number;
+
+    @ApiProperty({
+      title: "Название фильма",
+      example: `Диодорова. Против течения`
+    })
+    @IsNotEmpty({message: 'Значение не должно быть пустым'})
+    name: string;
+
+    @ApiProperty({
+      title: "Описание фильма",
+      example: `История жизни и карьеры российской спортсменки Анастасии Диодоровой.`
+    })
+    @IsNotEmpty({message: 'Значение не должно быть пустым'})
+    description: string;
+
+    @ApiProperty({
+      title: "Рейтинг фильма (по КП)",
+      example: `8.535`
+    })
+    @IsNotEmpty({message: 'Значение не должно быть пустым'})
+    rating: number;
+
+    @ApiProperty({
+      title: "Продолжительность фильма (в минутах)",
+      example: `93`
+    })
+    @IsNotEmpty({message: 'Значение не должно быть пустым'})
+    movieLength: number;
+
+    @ApiProperty({
+      title: "Возрастной рейтинг",
+      example: `12`
+    })
+    @IsNotEmpty({message: 'Значение не должно быть пустым'})
+    ageRating: number;
+
+    @ApiProperty({
+      title: "Жанры фильма",
+      example: `["спорт", "драма", "биография"]`
+    })
+    @IsNotEmpty({message: 'Значение не должно быть пустым'})
+    genres: string[];
+
+    @ApiProperty({
+      title: "Ссылка на постер",
+      example: `https://image.openmoviedb.com/kinopoisk-images/10768063/b1cbc945-b803-4ac6-b6ae-e036056431a6/600x900`
+    })
+    @IsNotEmpty({message: 'Значение не должно быть пустым'})
+    poster: string;
+}

@@ -1,8 +1,9 @@
 import { ConfigService } from '@nestjs/config';
 import { PrismaService } from './../prisma/prisma.service';
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { IMoviesResponse } from './interfaces/responseObject.interface';
+import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { IMovie, IMoviesResponse } from './interfaces/responseObject.interface';
 import { AllLogger } from 'src/common/log/logger.log';
+import { Movie } from 'prisma/generated/prisma/client';
 
 @Injectable()
 export class MoviesService {
@@ -15,48 +16,105 @@ export class MoviesService {
 
     async getMovies(){
         this.logger.log('Try to get movies', this.name);
-        const allUrl = 'https://api.kinopoisk.dev/v1.4/movie?page=1&limit=50&type=movie&year=2023-2025&audience.count=10000-999999999999999';
-        const allResponse = await fetch(allUrl, {
-        method: "GET",
-        headers: {"X-API-KEY":this.API_KEY},
-        });
-        // if(!allResponse.ok){
-        //     this.logger.warn('Error with allUrl response', this.name);
-        //     throw new InternalServerErrorException('Error with allUrl response')
-        // }
-        const allData = await this.necessaryData(await allResponse.json());
+        
+        let skipNumber = this.getRandom();
+        const allMovies = await this.prismaService.movie.findMany({
+            skip: skipNumber,
+            take: 50,
+        })
+        const allData = await this.necessaryData(allMovies);
 
-        const oneUrl = 'https://api.kinopoisk.dev/v1.4/movie?page=1&limit=1&type=movie&year=2025-2026&rating.kp=8-10&audience.count=10000-999999999999999';
-        const oneResponse = await fetch(oneUrl, {
-        method: "GET",
-        headers: {"X-API-KEY":this.API_KEY},
-        });
-        // if(!oneResponse.ok){
-        //     this.logger.warn('Error with oneUrl response', this.name);
-        //     throw new InternalServerErrorException('Error with oneUrl response')
-        // }
-        const oneData = await this.necessaryData(await oneResponse.json());
+        // await this.addToDatabase(allBasic);
 
-        const popularUrl = 'https://api.kinopoisk.dev/v1.4/movie?page=1&limit=20&type=movie&year=2010-2025&rating.kp=8-10&audience.count=10000-999999999999999';
-        const popularResponse = await fetch(popularUrl, {
-        method: "GET",
-        headers: {"X-API-KEY":this.API_KEY},
-        });
-        // if(!popularResponse.ok){
-        //     this.logger.warn('Error with popularUrl response', this.name);
-        //     throw new InternalServerErrorException('Error with popularUrl response')
-        // }
-        const popularData = await this.necessaryData(await popularResponse.json());
+        skipNumber = this.getRandom();
+        const oneMovie = await this.prismaService.movie.findFirst({
+            where:{
+                rating: {
+                    gte: 5
+                }
+            },
+            skip: skipNumber,
+            take: 1
+        })
+        const oneData = await this.necessaryOneData(oneMovie);
+
+        const popularMovies = await this.prismaService.movie.findMany({
+            where:{
+                rating:{
+                    gte: 8
+                }
+            },
+            take: 20,
+        })
+        const popularData = await this.necessaryData(popularMovies);
         this.logger.log('Successful!', this.name)
         return {main: oneData, popular: popularData, all: allData}
     }
 
-    private necessaryData(response: IMoviesResponse){
-        const array = response.docs;
+    async getMovie(paramId: string){
+        this.logger.log('Try to get all info about film', this.name);
+        let id: number;
+        try{
+            id = parseInt(paramId)
+        }catch(e){
+            this.logger.warn('ID is string!', this.name)
+            throw new BadRequestException('ID is string!')
+        }
+        const movie = await this.prismaService.movie.findUnique({
+            where:{
+                id
+            }
+        })
+
+        if(!movie){
+            this.logger.warn('Movie with this id not found', this.name);
+            throw new NotFoundException('Movie with this id not found')
+        }
+
+        return movie
+    }
+
+    private necessaryData(response: any){
+        const array = response;
         let moviesArray: any = [];
         for (let index = 0; index < array.length; index++) {
             const element: any = array[index];
             const name = element.name || element.alternativeName || "Неизвестно"
+            const url = element.poster
+            const movie = {id: element.id, name, url}
+            moviesArray.push(movie)
+        }
+        return moviesArray
+    }
+
+    private necessaryOneData(response: any){
+        const object: IMovie = response;
+        const movie = {id: object.id, name: object.name, url: object.poster}
+        return movie
+    }
+
+    private async addToDatabase(data: IMoviesResponse){
+        const array = data.docs;
+        let moviesArray: any = [];
+        for (let index = 0; index < array.length; index++) {
+            const element: any = array[index];
+            const id = element.id;
+            const name = element.name || element.alternativeName || "Неизвестно"
+            const description = element.description || '';
+            const rating = element.rating.kp;
+            const movieLength = element.movieLength || 0;
+            const ageRating = element.ageRating || 0;
+            const genresArray = element.genres || undefined;
+            let genres: any = [];
+            if(genresArray){
+                console.log(genresArray)
+                for (let i = 0; i < genresArray.length; i++){
+                const name = genresArray[i].name
+                genres.push(name)
+            }}
+            else{
+                genres = []
+            }
             const urlObject = element.poster
             let url: string
             if(urlObject && (typeof urlObject.url != undefined || urlObject.url != undefined)){
@@ -65,9 +123,34 @@ export class MoviesService {
             else{
                 url = ""
             }
-            const movie = {id: element.id, name, url}
+            const movie = {id, name, description, rating, movieLength, ageRating, genres, poster: url}
             moviesArray.push(movie)
         }
-        return moviesArray
+
+        const created = await this.prismaService.movie.createMany({
+            data: moviesArray
+        })
+
+        this.logger.log(created, this.name)
+        return true
+    }
+
+    private getRandom(){
+        const skipFirst = Math.ceil(Math.random()*100);
+        const skipSecond = 100 + Math.floor(Math.random()*100);
+        const skipThird = 200 + Math.floor(Math.random()*100);
+        const skipFourth = 300 + Math.floor(Math.random()*100);
+        const random = Math.floor(Math.random()*10);
+        let skip: number;
+        if(random >= 0 && random < 5){
+            skip = skipFirst;
+        }else if(random >= 5 && random < 10){
+            skip = skipThird;
+        }else if(random >= 10 && random < 15){
+            skip = skipSecond;
+        }else{
+            skip = skipFourth;
+        }
+        return skip
     }
 }

@@ -128,6 +128,19 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.MovieScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  rating: 'rating',
+  movieLength: 'movieLength',
+  ageRating: 'ageRating',
+  genres: 'genres',
+  poster: 'poster',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -140,7 +153,8 @@ exports.Prisma.QueryMode = {
 
 
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  Movie: 'Movie'
 };
 
 /**

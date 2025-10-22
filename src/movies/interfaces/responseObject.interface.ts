@@ -11,3 +11,16 @@ export interface IMovieInterface{
     name: string,
     url: string
 }
+
+export interface IMovie{
+    id: number,
+    name: string,
+    description: string,
+    rating: number,
+    movieLength: number,
+    ageRating: number,
+    genres: string[],
+    poster: string,
+    createdAt: string,
+    updatedAt: string
+}
