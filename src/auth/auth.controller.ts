@@ -40,6 +40,9 @@ export class AuthController {
     return this.authService.refresh(dto)
   }
 
+  @ApiOperation({
+    summary: "Выход из аккаунта"
+  })
   @Post('logout')
   @Authorization()
   async logout(@Authorized() user: User){
