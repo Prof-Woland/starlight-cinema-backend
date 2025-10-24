@@ -147,6 +147,14 @@ export class AuthService {
         return {...tokens}
     }
 
+    async logout(user: User){
+        this.logger.log('Try to logout', this.name);
+        await this.getCacheTokens(user.id);
+        await this.cacheManager.del(`${user.id + 'at'}`)
+        await this.cacheManager.del(`${user.id + 'rt'}`)
+        return true
+    }
+
     async validate(id: string, token: string){
         const user = await this.prismaService.user.findUnique({
             where: {

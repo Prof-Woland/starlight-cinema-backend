@@ -71,6 +71,7 @@ export class MoviesService {
             throw new NotFoundException('Movie with this id not found')
         }
 
+        this.logger.log("Successful!", this.name);
         return movie
     }
 

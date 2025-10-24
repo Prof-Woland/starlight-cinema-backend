@@ -4,6 +4,7 @@ import { UserDto, RefreshDto } from './dto/User.dto';
 import { ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { Authorized } from './decorators/authorized.decorator';
 import { User } from 'prisma/generated/prisma/client';
+import { Authorization } from './decorators/authorization.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -37,5 +38,11 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   async refresh(@Body() dto: RefreshDto){
     return this.authService.refresh(dto)
+  }
+
+  @Post('logout')
+  @Authorization()
+  async logout(@Authorized() user: User){
+    return await this.authService.logout(user)
   }
 }
