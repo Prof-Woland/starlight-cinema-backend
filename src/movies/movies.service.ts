@@ -1,9 +1,10 @@
 import { ConfigService } from '@nestjs/config';
 import { PrismaService } from './../prisma/prisma.service';
-import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { BadRequestException, ConflictException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { IMovie, IMoviesResponse } from './interfaces/responseObject.interface';
 import { AllLogger } from 'src/common/log/logger.log';
 import { Movie } from 'prisma/generated/prisma/client';
+import { createShowDto } from './dto/createShow.dto';
 
 @Injectable()
 export class MoviesService {
@@ -73,6 +74,79 @@ export class MoviesService {
 
         this.logger.log("Successful!", this.name);
         return movie
+    }
+
+    async getShows(id: number){
+        this.logger.log("Try to get movie's shows", this.name);
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+        const stringDate = yesterday.toLocaleDateString('ru-RU', {year: 'numeric', month: '2-digit', day: '2-digit',});
+        const expiredShows = await this.prismaService.shows.deleteMany({
+            where:{
+                movieId: id,
+                date: {lt: stringDate}
+            }
+        });
+        
+        const shows = await this.prismaService.shows.findMany({
+            where:{
+                movieId: id
+            }
+        });
+
+        if(!shows){
+            this.logger.warn("Shows not found", this.name);
+        }
+
+        this.logger.log("Successful", this.name);
+        return shows
+    }
+
+    async createShow(id: number, dto: createShowDto){
+        this.logger.log("Try to create one show", this.name);
+        const {date, time} = dto;
+
+        const existShow = await this.prismaService.shows.findFirst({
+            where:{
+                movieId: id,
+                date,
+                time
+            }
+        });
+
+        if(existShow){
+            this.logger.warn('This show is already exist', this.name);
+            throw new ConflictException('This show is already exist')
+        }
+
+        const days = [
+            'ВС',
+            'ПН',
+            'ВТ',
+            'СР',
+            'ЧТ',
+            'ПТ',
+            'СБ'
+        ];
+
+        const parts = date.split('.');
+        const day = parseInt(parts[0], 10);
+        const month = parseInt(parts[1], 10) - 1; // Month is 0-indexed in JavaScript Date
+        const year = parseInt(parts[2], 10);
+
+        const normalDate = new Date(year, month, day);
+        const dayName = days[normalDate.getDay()];
+
+        const newShow = await this.prismaService.shows.create({
+            data:{
+                date,
+                day: dayName,
+                time,
+                movieId: id
+            }
+        })
+        this.logger.log("Successful", this.name);
+        return newShow
     }
 
     private necessaryData(response: any){

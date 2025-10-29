@@ -58,6 +58,22 @@ model Movie {
 
   poster String
 
+  shows Shows[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+}
+
+model Shows {
+  id String @id @unique() @default(uuid())
+
+  day     String
+  date    String
+  time    String
+  movieId Int
+
+  movie Movie @relation(fields: [movieId], references: [id], onDelete: Cascade)
+
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 }
