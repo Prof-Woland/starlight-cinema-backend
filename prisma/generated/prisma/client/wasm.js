@@ -146,6 +146,7 @@ exports.Prisma.ShowsScalarFieldEnum = {
   day: 'day',
   date: 'date',
   time: 'time',
+  hall: 'hall',
   movieId: 'movieId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

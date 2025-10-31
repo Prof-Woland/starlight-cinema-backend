@@ -69,7 +69,8 @@ model Shows{
 
   day String
   date String
-  time String
+  time String[] @default([])
+  hall Int @default(0)
   movieId Int
 
   movie Movie @relation(fields: [movieId], references: [id], onDelete: Cascade)

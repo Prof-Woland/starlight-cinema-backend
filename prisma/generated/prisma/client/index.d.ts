@@ -3266,10 +3266,12 @@ export namespace Prisma {
   }
 
   export type ShowsAvgAggregateOutputType = {
+    hall: number | null
     movieId: number | null
   }
 
   export type ShowsSumAggregateOutputType = {
+    hall: number | null
     movieId: number | null
   }
 
@@ -3277,7 +3279,7 @@ export namespace Prisma {
     id: string | null
     day: string | null
     date: string | null
-    time: string | null
+    hall: number | null
     movieId: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -3287,7 +3289,7 @@ export namespace Prisma {
     id: string | null
     day: string | null
     date: string | null
-    time: string | null
+    hall: number | null
     movieId: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -3298,6 +3300,7 @@ export namespace Prisma {
     day: number
     date: number
     time: number
+    hall: number
     movieId: number
     createdAt: number
     updatedAt: number
@@ -3306,10 +3309,12 @@ export namespace Prisma {
 
 
   export type ShowsAvgAggregateInputType = {
+    hall?: true
     movieId?: true
   }
 
   export type ShowsSumAggregateInputType = {
+    hall?: true
     movieId?: true
   }
 
@@ -3317,7 +3322,7 @@ export namespace Prisma {
     id?: true
     day?: true
     date?: true
-    time?: true
+    hall?: true
     movieId?: true
     createdAt?: true
     updatedAt?: true
@@ -3327,7 +3332,7 @@ export namespace Prisma {
     id?: true
     day?: true
     date?: true
-    time?: true
+    hall?: true
     movieId?: true
     createdAt?: true
     updatedAt?: true
@@ -3338,6 +3343,7 @@ export namespace Prisma {
     day?: true
     date?: true
     time?: true
+    hall?: true
     movieId?: true
     createdAt?: true
     updatedAt?: true
@@ -3434,7 +3440,8 @@ export namespace Prisma {
     id: string
     day: string
     date: string
-    time: string
+    time: string[]
+    hall: number
     movieId: number
     createdAt: Date
     updatedAt: Date
@@ -3464,6 +3471,7 @@ export namespace Prisma {
     day?: boolean
     date?: boolean
     time?: boolean
+    hall?: boolean
     movieId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -3475,6 +3483,7 @@ export namespace Prisma {
     day?: boolean
     date?: boolean
     time?: boolean
+    hall?: boolean
     movieId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -3486,6 +3495,7 @@ export namespace Prisma {
     day?: boolean
     date?: boolean
     time?: boolean
+    hall?: boolean
     movieId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -3497,12 +3507,13 @@ export namespace Prisma {
     day?: boolean
     date?: boolean
     time?: boolean
+    hall?: boolean
     movieId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ShowsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "day" | "date" | "time" | "movieId" | "createdAt" | "updatedAt", ExtArgs["result"]["shows"]>
+  export type ShowsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "day" | "date" | "time" | "hall" | "movieId" | "createdAt" | "updatedAt", ExtArgs["result"]["shows"]>
   export type ShowsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     movie?: boolean | MovieDefaultArgs<ExtArgs>
   }
@@ -3522,7 +3533,8 @@ export namespace Prisma {
       id: string
       day: string
       date: string
-      time: string
+      time: string[]
+      hall: number
       movieId: number
       createdAt: Date
       updatedAt: Date
@@ -3953,7 +3965,8 @@ export namespace Prisma {
     readonly id: FieldRef<"Shows", 'String'>
     readonly day: FieldRef<"Shows", 'String'>
     readonly date: FieldRef<"Shows", 'String'>
-    readonly time: FieldRef<"Shows", 'String'>
+    readonly time: FieldRef<"Shows", 'String[]'>
+    readonly hall: FieldRef<"Shows", 'Int'>
     readonly movieId: FieldRef<"Shows", 'Int'>
     readonly createdAt: FieldRef<"Shows", 'DateTime'>
     readonly updatedAt: FieldRef<"Shows", 'DateTime'>
@@ -4417,6 +4430,7 @@ export namespace Prisma {
     day: 'day',
     date: 'date',
     time: 'time',
+    hall: 'hall',
     movieId: 'movieId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -4660,7 +4674,8 @@ export namespace Prisma {
     id?: StringFilter<"Shows"> | string
     day?: StringFilter<"Shows"> | string
     date?: StringFilter<"Shows"> | string
-    time?: StringFilter<"Shows"> | string
+    time?: StringNullableListFilter<"Shows">
+    hall?: IntFilter<"Shows"> | number
     movieId?: IntFilter<"Shows"> | number
     createdAt?: DateTimeFilter<"Shows"> | Date | string
     updatedAt?: DateTimeFilter<"Shows"> | Date | string
@@ -4672,6 +4687,7 @@ export namespace Prisma {
     day?: SortOrder
     date?: SortOrder
     time?: SortOrder
+    hall?: SortOrder
     movieId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -4685,7 +4701,8 @@ export namespace Prisma {
     NOT?: ShowsWhereInput | ShowsWhereInput[]
     day?: StringFilter<"Shows"> | string
     date?: StringFilter<"Shows"> | string
-    time?: StringFilter<"Shows"> | string
+    time?: StringNullableListFilter<"Shows">
+    hall?: IntFilter<"Shows"> | number
     movieId?: IntFilter<"Shows"> | number
     createdAt?: DateTimeFilter<"Shows"> | Date | string
     updatedAt?: DateTimeFilter<"Shows"> | Date | string
@@ -4697,6 +4714,7 @@ export namespace Prisma {
     day?: SortOrder
     date?: SortOrder
     time?: SortOrder
+    hall?: SortOrder
     movieId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -4714,7 +4732,8 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Shows"> | string
     day?: StringWithAggregatesFilter<"Shows"> | string
     date?: StringWithAggregatesFilter<"Shows"> | string
-    time?: StringWithAggregatesFilter<"Shows"> | string
+    time?: StringNullableListFilter<"Shows">
+    hall?: IntWithAggregatesFilter<"Shows"> | number
     movieId?: IntWithAggregatesFilter<"Shows"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Shows"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Shows"> | Date | string
@@ -4875,7 +4894,8 @@ export namespace Prisma {
     id?: string
     day: string
     date: string
-    time: string
+    time?: ShowsCreatetimeInput | string[]
+    hall?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     movie: MovieCreateNestedOneWithoutShowsInput
@@ -4885,7 +4905,8 @@ export namespace Prisma {
     id?: string
     day: string
     date: string
-    time: string
+    time?: ShowsCreatetimeInput | string[]
+    hall?: number
     movieId: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -4895,7 +4916,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     day?: StringFieldUpdateOperationsInput | string
     date?: StringFieldUpdateOperationsInput | string
-    time?: StringFieldUpdateOperationsInput | string
+    time?: ShowsUpdatetimeInput | string[]
+    hall?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     movie?: MovieUpdateOneRequiredWithoutShowsNestedInput
@@ -4905,7 +4927,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     day?: StringFieldUpdateOperationsInput | string
     date?: StringFieldUpdateOperationsInput | string
-    time?: StringFieldUpdateOperationsInput | string
+    time?: ShowsUpdatetimeInput | string[]
+    hall?: IntFieldUpdateOperationsInput | number
     movieId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4915,7 +4938,8 @@ export namespace Prisma {
     id?: string
     day: string
     date: string
-    time: string
+    time?: ShowsCreatetimeInput | string[]
+    hall?: number
     movieId: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -4925,7 +4949,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     day?: StringFieldUpdateOperationsInput | string
     date?: StringFieldUpdateOperationsInput | string
-    time?: StringFieldUpdateOperationsInput | string
+    time?: ShowsUpdatetimeInput | string[]
+    hall?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -4934,7 +4959,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     day?: StringFieldUpdateOperationsInput | string
     date?: StringFieldUpdateOperationsInput | string
-    time?: StringFieldUpdateOperationsInput | string
+    time?: ShowsUpdatetimeInput | string[]
+    hall?: IntFieldUpdateOperationsInput | number
     movieId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5155,12 +5181,14 @@ export namespace Prisma {
     day?: SortOrder
     date?: SortOrder
     time?: SortOrder
+    hall?: SortOrder
     movieId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type ShowsAvgOrderByAggregateInput = {
+    hall?: SortOrder
     movieId?: SortOrder
   }
 
@@ -5168,7 +5196,7 @@ export namespace Prisma {
     id?: SortOrder
     day?: SortOrder
     date?: SortOrder
-    time?: SortOrder
+    hall?: SortOrder
     movieId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -5178,13 +5206,14 @@ export namespace Prisma {
     id?: SortOrder
     day?: SortOrder
     date?: SortOrder
-    time?: SortOrder
+    hall?: SortOrder
     movieId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type ShowsSumOrderByAggregateInput = {
+    hall?: SortOrder
     movieId?: SortOrder
   }
 
@@ -5263,10 +5292,19 @@ export namespace Prisma {
     deleteMany?: ShowsScalarWhereInput | ShowsScalarWhereInput[]
   }
 
+  export type ShowsCreatetimeInput = {
+    set: string[]
+  }
+
   export type MovieCreateNestedOneWithoutShowsInput = {
     create?: XOR<MovieCreateWithoutShowsInput, MovieUncheckedCreateWithoutShowsInput>
     connectOrCreate?: MovieCreateOrConnectWithoutShowsInput
     connect?: MovieWhereUniqueInput
+  }
+
+  export type ShowsUpdatetimeInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type MovieUpdateOneRequiredWithoutShowsNestedInput = {
@@ -5402,7 +5440,8 @@ export namespace Prisma {
     id?: string
     day: string
     date: string
-    time: string
+    time?: ShowsCreatetimeInput | string[]
+    hall?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -5411,7 +5450,8 @@ export namespace Prisma {
     id?: string
     day: string
     date: string
-    time: string
+    time?: ShowsCreatetimeInput | string[]
+    hall?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -5449,7 +5489,8 @@ export namespace Prisma {
     id?: StringFilter<"Shows"> | string
     day?: StringFilter<"Shows"> | string
     date?: StringFilter<"Shows"> | string
-    time?: StringFilter<"Shows"> | string
+    time?: StringNullableListFilter<"Shows">
+    hall?: IntFilter<"Shows"> | number
     movieId?: IntFilter<"Shows"> | number
     createdAt?: DateTimeFilter<"Shows"> | Date | string
     updatedAt?: DateTimeFilter<"Shows"> | Date | string
@@ -5527,7 +5568,8 @@ export namespace Prisma {
     id?: string
     day: string
     date: string
-    time: string
+    time?: ShowsCreatetimeInput | string[]
+    hall?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -5536,7 +5578,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     day?: StringFieldUpdateOperationsInput | string
     date?: StringFieldUpdateOperationsInput | string
-    time?: StringFieldUpdateOperationsInput | string
+    time?: ShowsUpdatetimeInput | string[]
+    hall?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5545,7 +5588,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     day?: StringFieldUpdateOperationsInput | string
     date?: StringFieldUpdateOperationsInput | string
-    time?: StringFieldUpdateOperationsInput | string
+    time?: ShowsUpdatetimeInput | string[]
+    hall?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5554,7 +5598,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     day?: StringFieldUpdateOperationsInput | string
     date?: StringFieldUpdateOperationsInput | string
-    time?: StringFieldUpdateOperationsInput | string
+    time?: ShowsUpdatetimeInput | string[]
+    hall?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

@@ -1,11 +1,15 @@
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsArray, IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class createShowDto{
     @IsString()
     @IsNotEmpty()
     date: string
 
-    @IsString()
+    @IsArray()
     @IsNotEmpty()
-    time: string
+    time: []
+
+    @IsNumber()
+    @IsNotEmpty()
+    hall: number
 }

@@ -104,13 +104,13 @@ export class MoviesService {
 
     async createShow(id: number, dto: createShowDto){
         this.logger.log("Try to create one show", this.name);
-        const {date, time} = dto;
+        const {date, time, hall} = dto;
 
         const existShow = await this.prismaService.shows.findFirst({
             where:{
                 movieId: id,
                 date,
-                time
+                hall,
             }
         });
 
@@ -142,6 +142,7 @@ export class MoviesService {
                 date,
                 day: dayName,
                 time,
+                hall,
                 movieId: id
             }
         })
