@@ -7,9 +7,5 @@ export class createShowDto{
 
     @IsArray()
     @IsNotEmpty()
-    time: []
-
-    @IsNumber()
-    @IsNotEmpty()
-    hall: number
+    time: JSON[]
 }

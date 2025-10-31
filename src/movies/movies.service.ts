@@ -94,23 +94,34 @@ export class MoviesService {
             }
         });
 
+        let newShows :any = []
+
+        for (let index = 0; index < shows.length; index++) {
+            const element = shows[index];
+            newShows.push({
+                id: element.id,
+                day: element.day,
+                date: element.date,
+                time: JSON.parse(element.time),
+            })
+        }
+
         if(!shows){
             this.logger.warn("Shows not found", this.name);
         }
 
         this.logger.log("Successful", this.name);
-        return shows
+        return newShows
     }
 
     async createShow(id: number, dto: createShowDto){
         this.logger.log("Try to create one show", this.name);
-        const {date, time, hall} = dto;
+        const {date, time} = dto;
 
         const existShow = await this.prismaService.shows.findFirst({
             where:{
                 movieId: id,
                 date,
-                hall,
             }
         });
 
@@ -141,8 +152,7 @@ export class MoviesService {
             data:{
                 date,
                 day: dayName,
-                time,
-                hall,
+                time: JSON.stringify(time),
                 movieId: id
             }
         })

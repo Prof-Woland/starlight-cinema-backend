@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Shows" ALTER COLUMN "time" SET DATA TYPE TEXT[];
