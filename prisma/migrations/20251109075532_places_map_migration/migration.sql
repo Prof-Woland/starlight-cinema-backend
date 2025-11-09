@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Shows" ADD COLUMN     "free_places" INTEGER NOT NULL DEFAULT 0,
+ADD COLUMN     "places" TEXT NOT NULL DEFAULT '';

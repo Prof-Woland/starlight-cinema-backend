@@ -137,6 +137,7 @@ exports.Prisma.MovieScalarFieldEnum = {
   ageRating: 'ageRating',
   genres: 'genres',
   poster: 'poster',
+  cost: 'cost',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -146,7 +147,20 @@ exports.Prisma.ShowsScalarFieldEnum = {
   day: 'day',
   date: 'date',
   time: 'time',
+  places: 'places',
+  bookedPlaces: 'bookedPlaces',
   movieId: 'movieId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TicketsScalarFieldEnum = {
+  id: 'id',
+  row: 'row',
+  place: 'place',
+  cost: 'cost',
+  userId: 'userId',
+  showId: 'showId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -165,7 +179,8 @@ exports.Prisma.QueryMode = {
 exports.Prisma.ModelName = {
   User: 'User',
   Movie: 'Movie',
-  Shows: 'Shows'
+  Shows: 'Shows',
+  Tickets: 'Tickets'
 };
 
 /**

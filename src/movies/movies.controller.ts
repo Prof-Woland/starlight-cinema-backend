@@ -3,7 +3,9 @@ import { MoviesService } from './movies.service';
 import { ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { OkDto, OkOneDto } from './dto/movieOk.dto';
 import { Authorization } from 'src/auth/decorators/authorization.decorator';
-import { createShowDto } from './dto/createShow.dto';
+import { createShowDto, bookATicket } from './dto/createShow.dto';
+import { Authorized } from 'src/auth/decorators/authorized.decorator';
+import { User } from 'prisma/generated/prisma/client';
 
 @Controller('movies')
 export class MoviesController {
@@ -48,5 +50,25 @@ export class MoviesController {
   @Authorization()
   async getShows(@Param('id') id: string){
     return await this.moviesService.getShows(+id)
+  }
+
+  @ApiOperation({
+    summary: "Бронирование билетов"
+  })
+  @ApiOkResponse()
+  @Post('tickets/create/:id')
+  @Authorization()
+  async bookATicket(@Param('id') id: string, @Body() dto: bookATicket, @Authorized() user: User){
+    return await this.moviesService.bookATicket(id, dto, user)
+  }
+
+  @ApiOperation({
+    summary: "Получение занятых мест в залах"
+  })
+  @ApiOkResponse()
+  @Get('tickets/shows/:id')
+  @Authorization()
+  async getTicketsForShow(@Param('id') id: string){
+    return await this.moviesService.getTicketsForShow(id)
   }
 }

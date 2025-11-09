@@ -36,6 +36,8 @@ model User {
   login    String
   password String
 
+  tickets Tickets[]
+
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
@@ -60,6 +62,8 @@ model Movie {
 
   shows Shows[]
 
+  cost Decimal @default(20)
+
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 }
@@ -67,12 +71,34 @@ model Movie {
 model Shows {
   id String @id @unique() @default(uuid())
 
-  day     String
-  date    String
-  time    String @default("")
-  movieId Int
+  day  String
+  date String
+  time String @default("")
 
-  movie Movie @relation(fields: [movieId], references: [id], onDelete: Cascade)
+  places       String @default("")
+  bookedPlaces Int    @default(0) @map("free_places")
+
+  movieId Int
+  movie   Movie @relation(fields: [movieId], references: [id], onDelete: Cascade)
+
+  tickets Tickets[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+}
+
+model Tickets {
+  id String @id @unique() @default(uuid())
+
+  row   Int
+  place Int
+  cost  Float
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  showId String
+  show   Shows  @relation(fields: [showId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
