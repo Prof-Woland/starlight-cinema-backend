@@ -3,7 +3,7 @@ import { MoviesService } from './movies.service';
 import { ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { OkDto, OkOneDto } from './dto/movieOk.dto';
 import { Authorization } from 'src/auth/decorators/authorization.decorator';
-import { createShowDto, bookATicket } from './dto/createShow.dto';
+import { createShowDto, bookATicket, getTime } from './dto/createShow.dto';
 import { Authorized } from 'src/auth/decorators/authorized.decorator';
 import { User } from 'prisma/generated/prisma/client';
 
@@ -68,7 +68,7 @@ export class MoviesController {
   @ApiOkResponse()
   @Get('tickets/shows/:id')
   @Authorization()
-  async getTicketsForShow(@Param('id') id: string){
-    return await this.moviesService.getTicketsForShow(id)
+  async getTicketsForShow(@Param('id') id: string, @Body() dto: getTime){
+    return await this.moviesService.getTicketsForShow(id, dto)
   }
 }

@@ -4,7 +4,7 @@ import { BadRequestException, ConflictException, Injectable, InternalServerError
 import { IMovie, IMoviesResponse } from './interfaces/responseObject.interface';
 import { AllLogger } from 'src/common/log/logger.log';
 import { Movie, User } from 'prisma/generated/prisma/client';
-import { bookATicket, createShowDto } from './dto/createShow.dto';
+import { bookATicket, createShowDto, getTime } from './dto/createShow.dto';
 
 @Injectable()
 export class MoviesService {
@@ -103,7 +103,6 @@ export class MoviesService {
                 day: element.day,
                 date: element.date,
                 time: JSON.parse(element.time),
-                places: JSON.parse(element.places),
                 bookedTickets: element.bookedPlaces
             })
         }
@@ -434,9 +433,10 @@ export class MoviesService {
         return tickets
     }
 
-    async getTicketsForShow(id: string){
+    async getTicketsForShow(id: string, dto: getTime){
+        const {time} = dto
         this.logger.log("Try to get places", this.name);
-        const places = await this.prismaService.shows.findMany({
+        let place = await this.prismaService.shows.findUnique({
             where:{
                 id
             },
@@ -444,8 +444,13 @@ export class MoviesService {
                 places: true
             }
         })
+        const placesStr = place?.places
+        const placesArr = JSON.parse(placesStr || "")
+
+        const needTime = placesArr.findIndex(item => item.time === time);
+        console.log(placesArr[needTime])
         this.logger.log("Successful", this.name);
-        return places
+        return placesArr[needTime]
     }
 
     private necessaryData(response: any){
