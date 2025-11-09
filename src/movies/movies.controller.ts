@@ -66,7 +66,7 @@ export class MoviesController {
     summary: "Получение занятых мест в залах"
   })
   @ApiOkResponse()
-  @Get('tickets/shows/:id')
+  @Post('tickets/shows/:id')
   @Authorization()
   async getTicketsForShow(@Param('id') id: string, @Body() dto: getTime){
     return await this.moviesService.getTicketsForShow(id, dto)
