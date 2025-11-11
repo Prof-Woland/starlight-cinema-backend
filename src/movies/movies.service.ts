@@ -118,6 +118,7 @@ export class MoviesService {
     async createShow(id: number, dto: createShowDto){
         this.logger.log("Try to create one show", this.name);
         const {date, time} = dto;
+        await this.prismaService.shows.deleteMany({})
         const existShow = await this.prismaService.shows.findFirst({
             where:{
                 movieId: id,
@@ -304,12 +305,17 @@ export class MoviesService {
         const dayName = days[normalDate.getDay()];
 
         let shows : any = [];
+        let times : any = [];
         movieIds.forEach(element => {
             let timePlaces: any = [];
             time.forEach(el=>{
                 timePlaces.push({
                     time: el.time,
                     places: places,
+                })
+                times.push({
+                    time: el.time,
+                    hall: el.hall,
                     bookedPlaces: 0
                 })
             })
@@ -317,13 +323,13 @@ export class MoviesService {
                 movieId: element.id,
                 date,
                 day: dayName,
-                time: JSON.stringify(time),
+                time: JSON.stringify(times),
                 places: JSON.stringify(timePlaces),
             })
 
         });
 
-        const newShow = this.prismaService.shows.createMany({
+        const newShow = await this.prismaService.shows.createMany({
             data:shows
             })
         this.logger.log("Successful", this.name);
