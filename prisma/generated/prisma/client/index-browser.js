@@ -159,6 +159,7 @@ exports.Prisma.TicketsScalarFieldEnum = {
   row: 'row',
   place: 'place',
   cost: 'cost',
+  time: 'time',
   userId: 'userId',
   showId: 'showId',
   createdAt: 'createdAt',

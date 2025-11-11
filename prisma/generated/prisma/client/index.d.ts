@@ -4701,6 +4701,7 @@ export namespace Prisma {
     row: number | null
     place: number | null
     cost: number | null
+    time: string | null
     userId: string | null
     showId: string | null
     createdAt: Date | null
@@ -4712,6 +4713,7 @@ export namespace Prisma {
     row: number | null
     place: number | null
     cost: number | null
+    time: string | null
     userId: string | null
     showId: string | null
     createdAt: Date | null
@@ -4723,6 +4725,7 @@ export namespace Prisma {
     row: number
     place: number
     cost: number
+    time: number
     userId: number
     showId: number
     createdAt: number
@@ -4748,6 +4751,7 @@ export namespace Prisma {
     row?: true
     place?: true
     cost?: true
+    time?: true
     userId?: true
     showId?: true
     createdAt?: true
@@ -4759,6 +4763,7 @@ export namespace Prisma {
     row?: true
     place?: true
     cost?: true
+    time?: true
     userId?: true
     showId?: true
     createdAt?: true
@@ -4770,6 +4775,7 @@ export namespace Prisma {
     row?: true
     place?: true
     cost?: true
+    time?: true
     userId?: true
     showId?: true
     createdAt?: true
@@ -4868,6 +4874,7 @@ export namespace Prisma {
     row: number
     place: number
     cost: number
+    time: string
     userId: string
     showId: string
     createdAt: Date
@@ -4898,6 +4905,7 @@ export namespace Prisma {
     row?: boolean
     place?: boolean
     cost?: boolean
+    time?: boolean
     userId?: boolean
     showId?: boolean
     createdAt?: boolean
@@ -4911,6 +4919,7 @@ export namespace Prisma {
     row?: boolean
     place?: boolean
     cost?: boolean
+    time?: boolean
     userId?: boolean
     showId?: boolean
     createdAt?: boolean
@@ -4924,6 +4933,7 @@ export namespace Prisma {
     row?: boolean
     place?: boolean
     cost?: boolean
+    time?: boolean
     userId?: boolean
     showId?: boolean
     createdAt?: boolean
@@ -4937,13 +4947,14 @@ export namespace Prisma {
     row?: boolean
     place?: boolean
     cost?: boolean
+    time?: boolean
     userId?: boolean
     showId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type TicketsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "row" | "place" | "cost" | "userId" | "showId" | "createdAt" | "updatedAt", ExtArgs["result"]["tickets"]>
+  export type TicketsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "row" | "place" | "cost" | "time" | "userId" | "showId" | "createdAt" | "updatedAt", ExtArgs["result"]["tickets"]>
   export type TicketsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     show?: boolean | ShowsDefaultArgs<ExtArgs>
@@ -4968,6 +4979,7 @@ export namespace Prisma {
       row: number
       place: number
       cost: number
+      time: string
       userId: string
       showId: string
       createdAt: Date
@@ -5401,6 +5413,7 @@ export namespace Prisma {
     readonly row: FieldRef<"Tickets", 'Int'>
     readonly place: FieldRef<"Tickets", 'Int'>
     readonly cost: FieldRef<"Tickets", 'Float'>
+    readonly time: FieldRef<"Tickets", 'String'>
     readonly userId: FieldRef<"Tickets", 'String'>
     readonly showId: FieldRef<"Tickets", 'String'>
     readonly createdAt: FieldRef<"Tickets", 'DateTime'>
@@ -5881,6 +5894,7 @@ export namespace Prisma {
     row: 'row',
     place: 'place',
     cost: 'cost',
+    time: 'time',
     userId: 'userId',
     showId: 'showId',
     createdAt: 'createdAt',
@@ -6214,6 +6228,7 @@ export namespace Prisma {
     row?: IntFilter<"Tickets"> | number
     place?: IntFilter<"Tickets"> | number
     cost?: FloatFilter<"Tickets"> | number
+    time?: StringFilter<"Tickets"> | string
     userId?: StringFilter<"Tickets"> | string
     showId?: StringFilter<"Tickets"> | string
     createdAt?: DateTimeFilter<"Tickets"> | Date | string
@@ -6227,6 +6242,7 @@ export namespace Prisma {
     row?: SortOrder
     place?: SortOrder
     cost?: SortOrder
+    time?: SortOrder
     userId?: SortOrder
     showId?: SortOrder
     createdAt?: SortOrder
@@ -6243,6 +6259,7 @@ export namespace Prisma {
     row?: IntFilter<"Tickets"> | number
     place?: IntFilter<"Tickets"> | number
     cost?: FloatFilter<"Tickets"> | number
+    time?: StringFilter<"Tickets"> | string
     userId?: StringFilter<"Tickets"> | string
     showId?: StringFilter<"Tickets"> | string
     createdAt?: DateTimeFilter<"Tickets"> | Date | string
@@ -6256,6 +6273,7 @@ export namespace Prisma {
     row?: SortOrder
     place?: SortOrder
     cost?: SortOrder
+    time?: SortOrder
     userId?: SortOrder
     showId?: SortOrder
     createdAt?: SortOrder
@@ -6275,6 +6293,7 @@ export namespace Prisma {
     row?: IntWithAggregatesFilter<"Tickets"> | number
     place?: IntWithAggregatesFilter<"Tickets"> | number
     cost?: FloatWithAggregatesFilter<"Tickets"> | number
+    time?: StringWithAggregatesFilter<"Tickets"> | string
     userId?: StringWithAggregatesFilter<"Tickets"> | string
     showId?: StringWithAggregatesFilter<"Tickets"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Tickets"> | Date | string
@@ -6535,6 +6554,7 @@ export namespace Prisma {
     row: number
     place: number
     cost: number
+    time?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutTicketsInput
@@ -6546,6 +6566,7 @@ export namespace Prisma {
     row: number
     place: number
     cost: number
+    time?: string
     userId: string
     showId: string
     createdAt?: Date | string
@@ -6557,6 +6578,7 @@ export namespace Prisma {
     row?: IntFieldUpdateOperationsInput | number
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
+    time?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutTicketsNestedInput
@@ -6568,6 +6590,7 @@ export namespace Prisma {
     row?: IntFieldUpdateOperationsInput | number
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
+    time?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     showId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6579,6 +6602,7 @@ export namespace Prisma {
     row: number
     place: number
     cost: number
+    time?: string
     userId: string
     showId: string
     createdAt?: Date | string
@@ -6590,6 +6614,7 @@ export namespace Prisma {
     row?: IntFieldUpdateOperationsInput | number
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
+    time?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6599,6 +6624,7 @@ export namespace Prisma {
     row?: IntFieldUpdateOperationsInput | number
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
+    time?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     showId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6900,6 +6926,7 @@ export namespace Prisma {
     row?: SortOrder
     place?: SortOrder
     cost?: SortOrder
+    time?: SortOrder
     userId?: SortOrder
     showId?: SortOrder
     createdAt?: SortOrder
@@ -6917,6 +6944,7 @@ export namespace Prisma {
     row?: SortOrder
     place?: SortOrder
     cost?: SortOrder
+    time?: SortOrder
     userId?: SortOrder
     showId?: SortOrder
     createdAt?: SortOrder
@@ -6928,6 +6956,7 @@ export namespace Prisma {
     row?: SortOrder
     place?: SortOrder
     cost?: SortOrder
+    time?: SortOrder
     userId?: SortOrder
     showId?: SortOrder
     createdAt?: SortOrder
@@ -7307,6 +7336,7 @@ export namespace Prisma {
     row: number
     place: number
     cost: number
+    time?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     show: ShowsCreateNestedOneWithoutTicketsInput
@@ -7317,6 +7347,7 @@ export namespace Prisma {
     row: number
     place: number
     cost: number
+    time?: string
     showId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7356,6 +7387,7 @@ export namespace Prisma {
     row?: IntFilter<"Tickets"> | number
     place?: IntFilter<"Tickets"> | number
     cost?: FloatFilter<"Tickets"> | number
+    time?: StringFilter<"Tickets"> | string
     userId?: StringFilter<"Tickets"> | string
     showId?: StringFilter<"Tickets"> | string
     createdAt?: DateTimeFilter<"Tickets"> | Date | string
@@ -7465,6 +7497,7 @@ export namespace Prisma {
     row: number
     place: number
     cost: number
+    time?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutTicketsInput
@@ -7475,6 +7508,7 @@ export namespace Prisma {
     row: number
     place: number
     cost: number
+    time?: string
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7662,6 +7696,7 @@ export namespace Prisma {
     row: number
     place: number
     cost: number
+    time?: string
     showId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7672,6 +7707,7 @@ export namespace Prisma {
     row?: IntFieldUpdateOperationsInput | number
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
+    time?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     show?: ShowsUpdateOneRequiredWithoutTicketsNestedInput
@@ -7682,6 +7718,7 @@ export namespace Prisma {
     row?: IntFieldUpdateOperationsInput | number
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
+    time?: StringFieldUpdateOperationsInput | string
     showId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7692,6 +7729,7 @@ export namespace Prisma {
     row?: IntFieldUpdateOperationsInput | number
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
+    time?: StringFieldUpdateOperationsInput | string
     showId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7748,6 +7786,7 @@ export namespace Prisma {
     row: number
     place: number
     cost: number
+    time?: string
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7758,6 +7797,7 @@ export namespace Prisma {
     row?: IntFieldUpdateOperationsInput | number
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
+    time?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutTicketsNestedInput
@@ -7768,6 +7808,7 @@ export namespace Prisma {
     row?: IntFieldUpdateOperationsInput | number
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
+    time?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7778,6 +7819,7 @@ export namespace Prisma {
     row?: IntFieldUpdateOperationsInput | number
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
+    time?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

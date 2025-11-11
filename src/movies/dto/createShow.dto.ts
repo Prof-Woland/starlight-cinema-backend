@@ -19,7 +19,7 @@ export class bookATicket{
     })
     @IsString()
     @IsNotEmpty()
-    time: String
+    time: string
 
     @ApiProperty({
         title: "Информация о билетах",

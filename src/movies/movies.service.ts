@@ -6,6 +6,8 @@ import { IMovie, IMoviesResponse } from './interfaces/responseObject.interface';
 import { AllLogger } from 'src/common/log/logger.log';
 import { Movie, User } from 'prisma/generated/prisma/client';
 import { bookATicket, createShowDto, getTime } from './dto/createShow.dto';
+import * as fs from 'fs';
+import * as path from 'path';
 
 @Injectable()
 export class MoviesService {
@@ -24,9 +26,17 @@ export class MoviesService {
             skip: skipNumber,
             take: 50,
         })
-        const allData = await this.necessaryData(allMovies);
 
-        // await this.addToDatabase(allBasic);
+        // const allMovies = await this.prismaService.movie.findMany({
+        // })
+
+        // const filePath = path.join(__dirname, '..', 'output.txt'); // Указываем путь к файлу
+
+        // const fileContent = fs.readFileSync('./src/movies/output.txt', 'utf8');
+
+        // const allData = await this.necessaryData(allMovies);
+
+        // await this.addToDatabase(JSON.parse(fileContent));
 
         skipNumber = this.getRandom();
         const oneMovie = await this.prismaService.movie.findFirst({
@@ -50,7 +60,7 @@ export class MoviesService {
         })
         const popularData = await this.necessaryData(popularMovies);
         this.logger.log('Successful!', this.name)
-        return {main: oneData, popular: popularData, all: allData}
+        return {main: oneData, popular: popularData, all: allMovies}
     }
 
     async getMovie(paramId: string){
@@ -118,7 +128,6 @@ export class MoviesService {
     async createShow(id: number, dto: createShowDto){
         this.logger.log("Try to create one show", this.name);
         const {date, time} = dto;
-        await this.prismaService.shows.deleteMany({})
         const existShow = await this.prismaService.shows.findFirst({
             where:{
                 movieId: id,
@@ -305,9 +314,9 @@ export class MoviesService {
         const dayName = days[normalDate.getDay()];
 
         let shows : any = [];
-        let times : any = [];
         movieIds.forEach(element => {
             let timePlaces: any = [];
+            let times : any = [];
             time.forEach(el=>{
                 timePlaces.push({
                     time: el.time,
@@ -346,7 +355,7 @@ export class MoviesService {
         const ids = await this.prismaService.shows.findUnique({
             where: {id},
             select: {
-                movieId: true
+                movieId: true,
             }
         })
         const costs = await this.prismaService.movie.findUnique({
@@ -363,6 +372,7 @@ export class MoviesService {
                 userId: user.id,
                 row: element.row,
                 place: element.place,
+                time: time,
                 cost: costs?.cost,
             });
 
@@ -381,6 +391,7 @@ export class MoviesService {
         const exist = await this.prismaService.tickets.findMany({
             where:{
                 showId: id,
+                time,
                 OR: orConditions,
             }
         })
@@ -403,6 +414,7 @@ export class MoviesService {
 
         let freePlaces = JSON.parse(show?.places||'')
         let bookedPlaces = JSON.parse(show?.time||'')
+        console.log(ticketsArr.length)
         tickets.forEach(element => {
             const needTime = freePlaces.findIndex(item => item.time === time);
             const needTimeBook = bookedPlaces.findIndex(item => item.time === time);
@@ -411,7 +423,7 @@ export class MoviesService {
             const needRow = freePlaces[needTime].places[row];
             const needPlace = needRow.findIndex(item => item.id === place);
             freePlaces[needTime].places[row][needPlace].mode = "taken";
-            bookedPlaces[needTimeBook].bookedPlaces += ticketsArr.Length;
+            bookedPlaces[needTimeBook].bookedPlaces = bookedPlaces[needTimeBook].bookedPlaces + 1;
         });
 
         //let booked = JSON.parse(show?.bookedPlaces||'')
@@ -459,7 +471,6 @@ export class MoviesService {
         const placesArr = JSON.parse(placesStr || "")
 
         const needTime = placesArr.findIndex(item => item.time === time);
-        console.log(placesArr[needTime])
         this.logger.log("Successful", this.name);
         return placesArr[needTime]
     }
@@ -483,37 +494,20 @@ export class MoviesService {
         return movie
     }
 
-    private async addToDatabase(data: IMoviesResponse){
-        const array = data.docs;
+    private async addToDatabase(data: any){
+        const array = data;
         let moviesArray: any = [];
         for (let index = 0; index < array.length; index++) {
             const element: any = array[index];
             const id = element.id;
-            const name = element.name || element.alternativeName || "Неизвестно"
+            const name = element.name || "Неизвестно"
             const description = element.description || '';
-            const rating = element.rating.kp;
+            const rating = element.rating;
             const movieLength = element.movieLength || 0;
             const ageRating = element.ageRating || 0;
             const genresArray = element.genres || undefined;
-            let genres: any = [];
-            if(genresArray){
-                console.log(genresArray)
-                for (let i = 0; i < genresArray.length; i++){
-                const name = genresArray[i].name
-                genres.push(name)
-            }}
-            else{
-                genres = []
-            }
             const urlObject = element.poster
-            let url: string
-            if(urlObject && (typeof urlObject.url != undefined || urlObject.url != undefined)){
-                url = urlObject.url
-            }
-            else{
-                url = ""
-            }
-            const movie = {id, name, description, rating, movieLength, ageRating, genres, poster: url}
+            const movie = {id, name, description, rating, movieLength, ageRating, genres:genresArray, poster: urlObject}
             moviesArray.push(movie)
         }
 
