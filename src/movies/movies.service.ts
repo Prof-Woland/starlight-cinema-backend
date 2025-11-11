@@ -104,7 +104,7 @@ export class MoviesService {
                 day: element.day,
                 date: element.date,
                 time: JSON.parse(element.time),
-                bookedTickets: element.bookedPlaces
+                bookedTickets: JSON.parse(element.bookedPlaces)
             })
         }
 
