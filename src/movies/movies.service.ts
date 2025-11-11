@@ -347,6 +347,8 @@ export class MoviesService {
 
     async bookATicket(id: string, dto: bookATicket, user: User){
         const {time, tickets} = dto
+        console.log(time)
+        console.log(tickets)
         this.logger.log("Try to book tickets", this.name);
 
         let ticketsArr : any = [];
@@ -422,6 +424,9 @@ export class MoviesService {
             const place = element.place;
             const needRow = freePlaces[needTime].places[row];
             const needPlace = needRow.findIndex(item => item.id === place);
+            console.log(freePlaces)
+            console.log(freePlaces[needTime].places[row][needPlace])
+            console.log(freePlaces[needTime].places[row][needPlace].mode = "taken")
             freePlaces[needTime].places[row][needPlace].mode = "taken";
             bookedPlaces[needTimeBook].bookedPlaces = bookedPlaces[needTimeBook].bookedPlaces + 1;
         });
