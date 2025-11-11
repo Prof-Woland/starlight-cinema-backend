@@ -104,7 +104,6 @@ export class MoviesService {
                 day: element.day,
                 date: element.date,
                 time: JSON.parse(element.time),
-                bookedTickets: JSON.parse(element.bookedPlaces)
             })
         }
 
@@ -307,14 +306,10 @@ export class MoviesService {
         let shows : any = [];
         movieIds.forEach(element => {
             let timePlaces: any = [];
-            let bookedPlaces: any = [];
             time.forEach(el=>{
                 timePlaces.push({
                     time: el.time,
-                    places: places
-                })
-                timePlaces.push({
-                    time: el.time,
+                    places: places,
                     bookedPlaces: 0
                 })
             })
@@ -324,7 +319,6 @@ export class MoviesService {
                 day: dayName,
                 time: JSON.stringify(time),
                 places: JSON.stringify(timePlaces),
-                bookedPlaces: JSON.stringify(bookedPlaces)
             })
 
         });
@@ -397,12 +391,12 @@ export class MoviesService {
             },
             select:{
                 places: true,
-                bookedPlaces: true
+                time: true
             }
         })
 
         let freePlaces = JSON.parse(show?.places||'')
-        let bookedPlaces = JSON.parse(show?.bookedPlaces||'')
+        let bookedPlaces = JSON.parse(show?.time||'')
         tickets.forEach(element => {
             const needTime = freePlaces.findIndex(item => item.time === time);
             const needTimeBook = bookedPlaces.findIndex(item => item.time === time);
@@ -425,7 +419,7 @@ export class MoviesService {
             },
             data:{
                 places: JSON.stringify(freePlaces),
-                bookedPlaces: JSON.stringify(bookedPlaces),
+                time: JSON.stringify(bookedPlaces),
             }
         })
 
