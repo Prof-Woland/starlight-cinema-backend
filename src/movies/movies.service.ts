@@ -442,7 +442,7 @@ export class MoviesService {
         })
 
         this.logger.log("Successful", this.name);
-        return newTickets
+        return true
     }
 
     async getTicketsForUser(user: User){
