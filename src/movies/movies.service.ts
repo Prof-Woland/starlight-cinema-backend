@@ -1,3 +1,4 @@
+import { Length } from 'class-validator';
 import { ConfigService } from '@nestjs/config';
 import { PrismaService } from './../prisma/prisma.service';
 import { BadRequestException, ConflictException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
@@ -306,10 +307,15 @@ export class MoviesService {
         let shows : any = [];
         movieIds.forEach(element => {
             let timePlaces: any = [];
+            let bookedPlaces: any = [];
             time.forEach(el=>{
                 timePlaces.push({
                     time: el.time,
                     places: places
+                })
+                timePlaces.push({
+                    time: el.time,
+                    bookedPlaces: 0
                 })
             })
             shows.push({
@@ -317,7 +323,8 @@ export class MoviesService {
                 date,
                 day: dayName,
                 time: JSON.stringify(time),
-                places: JSON.stringify(timePlaces)
+                places: JSON.stringify(timePlaces),
+                bookedPlaces: JSON.stringify(bookedPlaces)
             })
 
         });
@@ -389,19 +396,25 @@ export class MoviesService {
                 id
             },
             select:{
-                places: true
+                places: true,
+                bookedPlaces: true
             }
         })
 
         let freePlaces = JSON.parse(show?.places||'')
+        let bookedPlaces = JSON.parse(show?.bookedPlaces||'')
         tickets.forEach(element => {
             const needTime = freePlaces.findIndex(item => item.time === time);
+            const needTimeBook = bookedPlaces.findIndex(item => item.time === time);
             const row = element.row;
             const place = element.place;
             const needRow = freePlaces[needTime].places[row];
             const needPlace = needRow.findIndex(item => item.id === place);
             freePlaces[needTime].places[row][needPlace].mode = "taken";
+            bookedPlaces[needTimeBook].bookedPlaces += ticketsArr.Length;
         });
+
+        //let booked = JSON.parse(show?.bookedPlaces||'')
 
         const newTickets = await this.prismaService.tickets.createMany({
             data: ticketsArr
@@ -412,9 +425,7 @@ export class MoviesService {
             },
             data:{
                 places: JSON.stringify(freePlaces),
-                bookedPlaces: {
-                    increment: ticketsArr.length
-                }
+                bookedPlaces: JSON.stringify(bookedPlaces),
             }
         })
 

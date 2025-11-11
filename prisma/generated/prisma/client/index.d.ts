@@ -3511,12 +3511,10 @@ export namespace Prisma {
   }
 
   export type ShowsAvgAggregateOutputType = {
-    bookedPlaces: number | null
     movieId: number | null
   }
 
   export type ShowsSumAggregateOutputType = {
-    bookedPlaces: number | null
     movieId: number | null
   }
 
@@ -3526,7 +3524,7 @@ export namespace Prisma {
     date: string | null
     time: string | null
     places: string | null
-    bookedPlaces: number | null
+    bookedPlaces: string | null
     movieId: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -3538,7 +3536,7 @@ export namespace Prisma {
     date: string | null
     time: string | null
     places: string | null
-    bookedPlaces: number | null
+    bookedPlaces: string | null
     movieId: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -3559,12 +3557,10 @@ export namespace Prisma {
 
 
   export type ShowsAvgAggregateInputType = {
-    bookedPlaces?: true
     movieId?: true
   }
 
   export type ShowsSumAggregateInputType = {
-    bookedPlaces?: true
     movieId?: true
   }
 
@@ -3697,7 +3693,7 @@ export namespace Prisma {
     date: string
     time: string
     places: string
-    bookedPlaces: number
+    bookedPlaces: string
     movieId: number
     createdAt: Date
     updatedAt: Date
@@ -3800,7 +3796,7 @@ export namespace Prisma {
       date: string
       time: string
       places: string
-      bookedPlaces: number
+      bookedPlaces: string
       movieId: number
       createdAt: Date
       updatedAt: Date
@@ -4234,7 +4230,7 @@ export namespace Prisma {
     readonly date: FieldRef<"Shows", 'String'>
     readonly time: FieldRef<"Shows", 'String'>
     readonly places: FieldRef<"Shows", 'String'>
-    readonly bookedPlaces: FieldRef<"Shows", 'Int'>
+    readonly bookedPlaces: FieldRef<"Shows", 'String'>
     readonly movieId: FieldRef<"Shows", 'Int'>
     readonly createdAt: FieldRef<"Shows", 'DateTime'>
     readonly updatedAt: FieldRef<"Shows", 'DateTime'>
@@ -6139,7 +6135,7 @@ export namespace Prisma {
     date?: StringFilter<"Shows"> | string
     time?: StringFilter<"Shows"> | string
     places?: StringFilter<"Shows"> | string
-    bookedPlaces?: IntFilter<"Shows"> | number
+    bookedPlaces?: StringFilter<"Shows"> | string
     movieId?: IntFilter<"Shows"> | number
     createdAt?: DateTimeFilter<"Shows"> | Date | string
     updatedAt?: DateTimeFilter<"Shows"> | Date | string
@@ -6170,7 +6166,7 @@ export namespace Prisma {
     date?: StringFilter<"Shows"> | string
     time?: StringFilter<"Shows"> | string
     places?: StringFilter<"Shows"> | string
-    bookedPlaces?: IntFilter<"Shows"> | number
+    bookedPlaces?: StringFilter<"Shows"> | string
     movieId?: IntFilter<"Shows"> | number
     createdAt?: DateTimeFilter<"Shows"> | Date | string
     updatedAt?: DateTimeFilter<"Shows"> | Date | string
@@ -6204,7 +6200,7 @@ export namespace Prisma {
     date?: StringWithAggregatesFilter<"Shows"> | string
     time?: StringWithAggregatesFilter<"Shows"> | string
     places?: StringWithAggregatesFilter<"Shows"> | string
-    bookedPlaces?: IntWithAggregatesFilter<"Shows"> | number
+    bookedPlaces?: StringWithAggregatesFilter<"Shows"> | string
     movieId?: IntWithAggregatesFilter<"Shows"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Shows"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Shows"> | Date | string
@@ -6453,7 +6449,7 @@ export namespace Prisma {
     date: string
     time?: string
     places?: string
-    bookedPlaces?: number
+    bookedPlaces?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     movie: MovieCreateNestedOneWithoutShowsInput
@@ -6466,7 +6462,7 @@ export namespace Prisma {
     date: string
     time?: string
     places?: string
-    bookedPlaces?: number
+    bookedPlaces?: string
     movieId: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -6479,7 +6475,7 @@ export namespace Prisma {
     date?: StringFieldUpdateOperationsInput | string
     time?: StringFieldUpdateOperationsInput | string
     places?: StringFieldUpdateOperationsInput | string
-    bookedPlaces?: IntFieldUpdateOperationsInput | number
+    bookedPlaces?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     movie?: MovieUpdateOneRequiredWithoutShowsNestedInput
@@ -6492,7 +6488,7 @@ export namespace Prisma {
     date?: StringFieldUpdateOperationsInput | string
     time?: StringFieldUpdateOperationsInput | string
     places?: StringFieldUpdateOperationsInput | string
-    bookedPlaces?: IntFieldUpdateOperationsInput | number
+    bookedPlaces?: StringFieldUpdateOperationsInput | string
     movieId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6505,7 +6501,7 @@ export namespace Prisma {
     date: string
     time?: string
     places?: string
-    bookedPlaces?: number
+    bookedPlaces?: string
     movieId: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -6517,7 +6513,7 @@ export namespace Prisma {
     date?: StringFieldUpdateOperationsInput | string
     time?: StringFieldUpdateOperationsInput | string
     places?: StringFieldUpdateOperationsInput | string
-    bookedPlaces?: IntFieldUpdateOperationsInput | number
+    bookedPlaces?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6528,7 +6524,7 @@ export namespace Prisma {
     date?: StringFieldUpdateOperationsInput | string
     time?: StringFieldUpdateOperationsInput | string
     places?: StringFieldUpdateOperationsInput | string
-    bookedPlaces?: IntFieldUpdateOperationsInput | number
+    bookedPlaces?: StringFieldUpdateOperationsInput | string
     movieId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6847,7 +6843,6 @@ export namespace Prisma {
   }
 
   export type ShowsAvgOrderByAggregateInput = {
-    bookedPlaces?: SortOrder
     movieId?: SortOrder
   }
 
@@ -6876,7 +6871,6 @@ export namespace Prisma {
   }
 
   export type ShowsSumOrderByAggregateInput = {
-    bookedPlaces?: SortOrder
     movieId?: SortOrder
   }
 
@@ -7374,7 +7368,7 @@ export namespace Prisma {
     date: string
     time?: string
     places?: string
-    bookedPlaces?: number
+    bookedPlaces?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     tickets?: TicketsCreateNestedManyWithoutShowInput
@@ -7386,7 +7380,7 @@ export namespace Prisma {
     date: string
     time?: string
     places?: string
-    bookedPlaces?: number
+    bookedPlaces?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     tickets?: TicketsUncheckedCreateNestedManyWithoutShowInput
@@ -7427,7 +7421,7 @@ export namespace Prisma {
     date?: StringFilter<"Shows"> | string
     time?: StringFilter<"Shows"> | string
     places?: StringFilter<"Shows"> | string
-    bookedPlaces?: IntFilter<"Shows"> | number
+    bookedPlaces?: StringFilter<"Shows"> | string
     movieId?: IntFilter<"Shows"> | number
     createdAt?: DateTimeFilter<"Shows"> | Date | string
     updatedAt?: DateTimeFilter<"Shows"> | Date | string
@@ -7578,7 +7572,7 @@ export namespace Prisma {
     date: string
     time?: string
     places?: string
-    bookedPlaces?: number
+    bookedPlaces?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     movie: MovieCreateNestedOneWithoutShowsInput
@@ -7590,7 +7584,7 @@ export namespace Prisma {
     date: string
     time?: string
     places?: string
-    bookedPlaces?: number
+    bookedPlaces?: string
     movieId: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7645,7 +7639,7 @@ export namespace Prisma {
     date?: StringFieldUpdateOperationsInput | string
     time?: StringFieldUpdateOperationsInput | string
     places?: StringFieldUpdateOperationsInput | string
-    bookedPlaces?: IntFieldUpdateOperationsInput | number
+    bookedPlaces?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     movie?: MovieUpdateOneRequiredWithoutShowsNestedInput
@@ -7657,7 +7651,7 @@ export namespace Prisma {
     date?: StringFieldUpdateOperationsInput | string
     time?: StringFieldUpdateOperationsInput | string
     places?: StringFieldUpdateOperationsInput | string
-    bookedPlaces?: IntFieldUpdateOperationsInput | number
+    bookedPlaces?: StringFieldUpdateOperationsInput | string
     movieId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7709,7 +7703,7 @@ export namespace Prisma {
     date: string
     time?: string
     places?: string
-    bookedPlaces?: number
+    bookedPlaces?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7720,7 +7714,7 @@ export namespace Prisma {
     date?: StringFieldUpdateOperationsInput | string
     time?: StringFieldUpdateOperationsInput | string
     places?: StringFieldUpdateOperationsInput | string
-    bookedPlaces?: IntFieldUpdateOperationsInput | number
+    bookedPlaces?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tickets?: TicketsUpdateManyWithoutShowNestedInput
@@ -7732,7 +7726,7 @@ export namespace Prisma {
     date?: StringFieldUpdateOperationsInput | string
     time?: StringFieldUpdateOperationsInput | string
     places?: StringFieldUpdateOperationsInput | string
-    bookedPlaces?: IntFieldUpdateOperationsInput | number
+    bookedPlaces?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tickets?: TicketsUncheckedUpdateManyWithoutShowNestedInput
@@ -7744,7 +7738,7 @@ export namespace Prisma {
     date?: StringFieldUpdateOperationsInput | string
     time?: StringFieldUpdateOperationsInput | string
     places?: StringFieldUpdateOperationsInput | string
-    bookedPlaces?: IntFieldUpdateOperationsInput | number
+    bookedPlaces?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
