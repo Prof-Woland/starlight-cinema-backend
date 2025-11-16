@@ -369,6 +369,8 @@ export class MoviesService {
             where: {id},
             select: {
                 movieId: true,
+                day: true,
+                date: true
             }
         })
         const costs = await this.prismaService.movie.findUnique({
@@ -379,13 +381,29 @@ export class MoviesService {
                 cost: true
             }
         })
+
+        const show = await this.prismaService.shows.findUnique({
+            where: {
+                id
+            },
+            select:{
+                places: true,
+                time: true
+            }
+        })
+
+        let bookedPlaces = JSON.parse(show?.time||'')
         tickets.forEach(element => {
+            const needTimeBook = bookedPlaces.findIndex(item => item.time === time);
             ticketsArr.push({
                 showId: id,
                 userId: user.id,
                 row: element.row,
                 place: element.place,
                 time: time,
+                day: ids?.day,
+                date: ids?.date,
+                hall: bookedPlaces[needTimeBook].hall,
                 cost: costs?.cost,
             });
 
@@ -415,18 +433,8 @@ export class MoviesService {
             throw new ConflictException();
         }
 
-        const show = await this.prismaService.shows.findUnique({
-            where: {
-                id
-            },
-            select:{
-                places: true,
-                time: true
-            }
-        })
-
+       
         let freePlaces = JSON.parse(show?.places||'')
-        let bookedPlaces = JSON.parse(show?.time||'')
         console.log(ticketsArr.length)
         tickets.forEach(element => {
             const needTime = freePlaces.findIndex(item => item.time === time);
@@ -465,7 +473,16 @@ export class MoviesService {
         this.logger.log("Try to get tickets", this.name);
         const tickets = await this.prismaService.tickets.findMany({
             where:{
-                id: user.id
+                userId: user.id
+            },
+            select:{
+                id: true,
+                day: true,
+                date: true,
+                time: true,
+                hall: true,
+                row: true,
+                place: true,
             }
         })
         this.logger.log("Successful", this.name);

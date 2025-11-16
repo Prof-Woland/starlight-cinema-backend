@@ -71,4 +71,14 @@ export class MoviesController {
   async getTicketsForShow(@Param('id') id: string, @Body() dto: getTime){
     return await this.moviesService.getTicketsForShow(id, dto)
   }
+
+  @ApiOperation({
+    summary: "Получение билетов пользователя"
+  })
+  @ApiOkResponse()
+  @Get('tickets/user')
+  @Authorization()
+  async getTicketsForUser(@Authorized() user: User){
+    return await this.moviesService.getTicketsForUser(user)
+  }
 }

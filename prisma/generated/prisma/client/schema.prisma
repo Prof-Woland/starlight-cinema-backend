@@ -80,6 +80,10 @@ model Tickets {
   cost  Float
   time  String @default("")
 
+  hall Int    @default(0)
+  day  String @default("")
+  date String @default("")
+
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 

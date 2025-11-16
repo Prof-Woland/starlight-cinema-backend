@@ -4688,12 +4688,14 @@ export namespace Prisma {
     row: number | null
     place: number | null
     cost: number | null
+    hall: number | null
   }
 
   export type TicketsSumAggregateOutputType = {
     row: number | null
     place: number | null
     cost: number | null
+    hall: number | null
   }
 
   export type TicketsMinAggregateOutputType = {
@@ -4702,6 +4704,9 @@ export namespace Prisma {
     place: number | null
     cost: number | null
     time: string | null
+    hall: number | null
+    day: string | null
+    date: string | null
     userId: string | null
     showId: string | null
     createdAt: Date | null
@@ -4714,6 +4719,9 @@ export namespace Prisma {
     place: number | null
     cost: number | null
     time: string | null
+    hall: number | null
+    day: string | null
+    date: string | null
     userId: string | null
     showId: string | null
     createdAt: Date | null
@@ -4726,6 +4734,9 @@ export namespace Prisma {
     place: number
     cost: number
     time: number
+    hall: number
+    day: number
+    date: number
     userId: number
     showId: number
     createdAt: number
@@ -4738,12 +4749,14 @@ export namespace Prisma {
     row?: true
     place?: true
     cost?: true
+    hall?: true
   }
 
   export type TicketsSumAggregateInputType = {
     row?: true
     place?: true
     cost?: true
+    hall?: true
   }
 
   export type TicketsMinAggregateInputType = {
@@ -4752,6 +4765,9 @@ export namespace Prisma {
     place?: true
     cost?: true
     time?: true
+    hall?: true
+    day?: true
+    date?: true
     userId?: true
     showId?: true
     createdAt?: true
@@ -4764,6 +4780,9 @@ export namespace Prisma {
     place?: true
     cost?: true
     time?: true
+    hall?: true
+    day?: true
+    date?: true
     userId?: true
     showId?: true
     createdAt?: true
@@ -4776,6 +4795,9 @@ export namespace Prisma {
     place?: true
     cost?: true
     time?: true
+    hall?: true
+    day?: true
+    date?: true
     userId?: true
     showId?: true
     createdAt?: true
@@ -4875,6 +4897,9 @@ export namespace Prisma {
     place: number
     cost: number
     time: string
+    hall: number
+    day: string
+    date: string
     userId: string
     showId: string
     createdAt: Date
@@ -4906,6 +4931,9 @@ export namespace Prisma {
     place?: boolean
     cost?: boolean
     time?: boolean
+    hall?: boolean
+    day?: boolean
+    date?: boolean
     userId?: boolean
     showId?: boolean
     createdAt?: boolean
@@ -4920,6 +4948,9 @@ export namespace Prisma {
     place?: boolean
     cost?: boolean
     time?: boolean
+    hall?: boolean
+    day?: boolean
+    date?: boolean
     userId?: boolean
     showId?: boolean
     createdAt?: boolean
@@ -4934,6 +4965,9 @@ export namespace Prisma {
     place?: boolean
     cost?: boolean
     time?: boolean
+    hall?: boolean
+    day?: boolean
+    date?: boolean
     userId?: boolean
     showId?: boolean
     createdAt?: boolean
@@ -4948,13 +4982,16 @@ export namespace Prisma {
     place?: boolean
     cost?: boolean
     time?: boolean
+    hall?: boolean
+    day?: boolean
+    date?: boolean
     userId?: boolean
     showId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type TicketsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "row" | "place" | "cost" | "time" | "userId" | "showId" | "createdAt" | "updatedAt", ExtArgs["result"]["tickets"]>
+  export type TicketsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "row" | "place" | "cost" | "time" | "hall" | "day" | "date" | "userId" | "showId" | "createdAt" | "updatedAt", ExtArgs["result"]["tickets"]>
   export type TicketsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     show?: boolean | ShowsDefaultArgs<ExtArgs>
@@ -4980,6 +5017,9 @@ export namespace Prisma {
       place: number
       cost: number
       time: string
+      hall: number
+      day: string
+      date: string
       userId: string
       showId: string
       createdAt: Date
@@ -5414,6 +5454,9 @@ export namespace Prisma {
     readonly place: FieldRef<"Tickets", 'Int'>
     readonly cost: FieldRef<"Tickets", 'Float'>
     readonly time: FieldRef<"Tickets", 'String'>
+    readonly hall: FieldRef<"Tickets", 'Int'>
+    readonly day: FieldRef<"Tickets", 'String'>
+    readonly date: FieldRef<"Tickets", 'String'>
     readonly userId: FieldRef<"Tickets", 'String'>
     readonly showId: FieldRef<"Tickets", 'String'>
     readonly createdAt: FieldRef<"Tickets", 'DateTime'>
@@ -5895,6 +5938,9 @@ export namespace Prisma {
     place: 'place',
     cost: 'cost',
     time: 'time',
+    hall: 'hall',
+    day: 'day',
+    date: 'date',
     userId: 'userId',
     showId: 'showId',
     createdAt: 'createdAt',
@@ -6229,6 +6275,9 @@ export namespace Prisma {
     place?: IntFilter<"Tickets"> | number
     cost?: FloatFilter<"Tickets"> | number
     time?: StringFilter<"Tickets"> | string
+    hall?: IntFilter<"Tickets"> | number
+    day?: StringFilter<"Tickets"> | string
+    date?: StringFilter<"Tickets"> | string
     userId?: StringFilter<"Tickets"> | string
     showId?: StringFilter<"Tickets"> | string
     createdAt?: DateTimeFilter<"Tickets"> | Date | string
@@ -6243,6 +6292,9 @@ export namespace Prisma {
     place?: SortOrder
     cost?: SortOrder
     time?: SortOrder
+    hall?: SortOrder
+    day?: SortOrder
+    date?: SortOrder
     userId?: SortOrder
     showId?: SortOrder
     createdAt?: SortOrder
@@ -6260,6 +6312,9 @@ export namespace Prisma {
     place?: IntFilter<"Tickets"> | number
     cost?: FloatFilter<"Tickets"> | number
     time?: StringFilter<"Tickets"> | string
+    hall?: IntFilter<"Tickets"> | number
+    day?: StringFilter<"Tickets"> | string
+    date?: StringFilter<"Tickets"> | string
     userId?: StringFilter<"Tickets"> | string
     showId?: StringFilter<"Tickets"> | string
     createdAt?: DateTimeFilter<"Tickets"> | Date | string
@@ -6274,6 +6329,9 @@ export namespace Prisma {
     place?: SortOrder
     cost?: SortOrder
     time?: SortOrder
+    hall?: SortOrder
+    day?: SortOrder
+    date?: SortOrder
     userId?: SortOrder
     showId?: SortOrder
     createdAt?: SortOrder
@@ -6294,6 +6352,9 @@ export namespace Prisma {
     place?: IntWithAggregatesFilter<"Tickets"> | number
     cost?: FloatWithAggregatesFilter<"Tickets"> | number
     time?: StringWithAggregatesFilter<"Tickets"> | string
+    hall?: IntWithAggregatesFilter<"Tickets"> | number
+    day?: StringWithAggregatesFilter<"Tickets"> | string
+    date?: StringWithAggregatesFilter<"Tickets"> | string
     userId?: StringWithAggregatesFilter<"Tickets"> | string
     showId?: StringWithAggregatesFilter<"Tickets"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Tickets"> | Date | string
@@ -6555,6 +6616,9 @@ export namespace Prisma {
     place: number
     cost: number
     time?: string
+    hall?: number
+    day?: string
+    date?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutTicketsInput
@@ -6567,6 +6631,9 @@ export namespace Prisma {
     place: number
     cost: number
     time?: string
+    hall?: number
+    day?: string
+    date?: string
     userId: string
     showId: string
     createdAt?: Date | string
@@ -6579,6 +6646,9 @@ export namespace Prisma {
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
     time?: StringFieldUpdateOperationsInput | string
+    hall?: IntFieldUpdateOperationsInput | number
+    day?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutTicketsNestedInput
@@ -6591,6 +6661,9 @@ export namespace Prisma {
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
     time?: StringFieldUpdateOperationsInput | string
+    hall?: IntFieldUpdateOperationsInput | number
+    day?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     showId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6603,6 +6676,9 @@ export namespace Prisma {
     place: number
     cost: number
     time?: string
+    hall?: number
+    day?: string
+    date?: string
     userId: string
     showId: string
     createdAt?: Date | string
@@ -6615,6 +6691,9 @@ export namespace Prisma {
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
     time?: StringFieldUpdateOperationsInput | string
+    hall?: IntFieldUpdateOperationsInput | number
+    day?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6625,6 +6704,9 @@ export namespace Prisma {
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
     time?: StringFieldUpdateOperationsInput | string
+    hall?: IntFieldUpdateOperationsInput | number
+    day?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     showId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6927,6 +7009,9 @@ export namespace Prisma {
     place?: SortOrder
     cost?: SortOrder
     time?: SortOrder
+    hall?: SortOrder
+    day?: SortOrder
+    date?: SortOrder
     userId?: SortOrder
     showId?: SortOrder
     createdAt?: SortOrder
@@ -6937,6 +7022,7 @@ export namespace Prisma {
     row?: SortOrder
     place?: SortOrder
     cost?: SortOrder
+    hall?: SortOrder
   }
 
   export type TicketsMaxOrderByAggregateInput = {
@@ -6945,6 +7031,9 @@ export namespace Prisma {
     place?: SortOrder
     cost?: SortOrder
     time?: SortOrder
+    hall?: SortOrder
+    day?: SortOrder
+    date?: SortOrder
     userId?: SortOrder
     showId?: SortOrder
     createdAt?: SortOrder
@@ -6957,6 +7046,9 @@ export namespace Prisma {
     place?: SortOrder
     cost?: SortOrder
     time?: SortOrder
+    hall?: SortOrder
+    day?: SortOrder
+    date?: SortOrder
     userId?: SortOrder
     showId?: SortOrder
     createdAt?: SortOrder
@@ -6967,6 +7059,7 @@ export namespace Prisma {
     row?: SortOrder
     place?: SortOrder
     cost?: SortOrder
+    hall?: SortOrder
   }
 
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -7337,6 +7430,9 @@ export namespace Prisma {
     place: number
     cost: number
     time?: string
+    hall?: number
+    day?: string
+    date?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     show: ShowsCreateNestedOneWithoutTicketsInput
@@ -7348,6 +7444,9 @@ export namespace Prisma {
     place: number
     cost: number
     time?: string
+    hall?: number
+    day?: string
+    date?: string
     showId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7388,6 +7487,9 @@ export namespace Prisma {
     place?: IntFilter<"Tickets"> | number
     cost?: FloatFilter<"Tickets"> | number
     time?: StringFilter<"Tickets"> | string
+    hall?: IntFilter<"Tickets"> | number
+    day?: StringFilter<"Tickets"> | string
+    date?: StringFilter<"Tickets"> | string
     userId?: StringFilter<"Tickets"> | string
     showId?: StringFilter<"Tickets"> | string
     createdAt?: DateTimeFilter<"Tickets"> | Date | string
@@ -7498,6 +7600,9 @@ export namespace Prisma {
     place: number
     cost: number
     time?: string
+    hall?: number
+    day?: string
+    date?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutTicketsInput
@@ -7509,6 +7614,9 @@ export namespace Prisma {
     place: number
     cost: number
     time?: string
+    hall?: number
+    day?: string
+    date?: string
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7697,6 +7805,9 @@ export namespace Prisma {
     place: number
     cost: number
     time?: string
+    hall?: number
+    day?: string
+    date?: string
     showId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7708,6 +7819,9 @@ export namespace Prisma {
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
     time?: StringFieldUpdateOperationsInput | string
+    hall?: IntFieldUpdateOperationsInput | number
+    day?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     show?: ShowsUpdateOneRequiredWithoutTicketsNestedInput
@@ -7719,6 +7833,9 @@ export namespace Prisma {
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
     time?: StringFieldUpdateOperationsInput | string
+    hall?: IntFieldUpdateOperationsInput | number
+    day?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
     showId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7730,6 +7847,9 @@ export namespace Prisma {
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
     time?: StringFieldUpdateOperationsInput | string
+    hall?: IntFieldUpdateOperationsInput | number
+    day?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
     showId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7787,6 +7907,9 @@ export namespace Prisma {
     place: number
     cost: number
     time?: string
+    hall?: number
+    day?: string
+    date?: string
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7798,6 +7921,9 @@ export namespace Prisma {
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
     time?: StringFieldUpdateOperationsInput | string
+    hall?: IntFieldUpdateOperationsInput | number
+    day?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutTicketsNestedInput
@@ -7809,6 +7935,9 @@ export namespace Prisma {
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
     time?: StringFieldUpdateOperationsInput | string
+    hall?: IntFieldUpdateOperationsInput | number
+    day?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7820,6 +7949,9 @@ export namespace Prisma {
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
     time?: StringFieldUpdateOperationsInput | string
+    hall?: IntFieldUpdateOperationsInput | number
+    day?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
