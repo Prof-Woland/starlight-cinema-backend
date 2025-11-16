@@ -121,8 +121,19 @@ export class MoviesService {
             this.logger.warn("Shows not found", this.name);
         }
 
+        const parseDate = (dateStr: string): Date => {
+            const [day, month, year] = dateStr.split('.').map(Number);
+            return new Date(year, month - 1, day); // месяц - 1, т.к. в JS месяцы с 0
+        };
+
+        const sortedData = newShows.sort((a: any, b: any) => {
+            const dateA = parseDate(a.date);
+            const dateB = parseDate(b.date);
+            return dateA.getTime() - dateB.getTime();
+        });
+
         this.logger.log("Successful", this.name);
-        return newShows
+        return sortedData
     }
 
     async createShow(id: number, dto: createShowDto){
