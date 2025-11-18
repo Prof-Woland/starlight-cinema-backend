@@ -75,6 +75,7 @@ model Shows{
 model Tickets{
   id String @id @unique() @default(uuid())
 
+  name String @default("")
   row Int
   place Int
   cost Float

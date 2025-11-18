@@ -4700,6 +4700,7 @@ export namespace Prisma {
 
   export type TicketsMinAggregateOutputType = {
     id: string | null
+    name: string | null
     row: number | null
     place: number | null
     cost: number | null
@@ -4715,6 +4716,7 @@ export namespace Prisma {
 
   export type TicketsMaxAggregateOutputType = {
     id: string | null
+    name: string | null
     row: number | null
     place: number | null
     cost: number | null
@@ -4730,6 +4732,7 @@ export namespace Prisma {
 
   export type TicketsCountAggregateOutputType = {
     id: number
+    name: number
     row: number
     place: number
     cost: number
@@ -4761,6 +4764,7 @@ export namespace Prisma {
 
   export type TicketsMinAggregateInputType = {
     id?: true
+    name?: true
     row?: true
     place?: true
     cost?: true
@@ -4776,6 +4780,7 @@ export namespace Prisma {
 
   export type TicketsMaxAggregateInputType = {
     id?: true
+    name?: true
     row?: true
     place?: true
     cost?: true
@@ -4791,6 +4796,7 @@ export namespace Prisma {
 
   export type TicketsCountAggregateInputType = {
     id?: true
+    name?: true
     row?: true
     place?: true
     cost?: true
@@ -4893,6 +4899,7 @@ export namespace Prisma {
 
   export type TicketsGroupByOutputType = {
     id: string
+    name: string
     row: number
     place: number
     cost: number
@@ -4927,6 +4934,7 @@ export namespace Prisma {
 
   export type TicketsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    name?: boolean
     row?: boolean
     place?: boolean
     cost?: boolean
@@ -4944,6 +4952,7 @@ export namespace Prisma {
 
   export type TicketsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    name?: boolean
     row?: boolean
     place?: boolean
     cost?: boolean
@@ -4961,6 +4970,7 @@ export namespace Prisma {
 
   export type TicketsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    name?: boolean
     row?: boolean
     place?: boolean
     cost?: boolean
@@ -4978,6 +4988,7 @@ export namespace Prisma {
 
   export type TicketsSelectScalar = {
     id?: boolean
+    name?: boolean
     row?: boolean
     place?: boolean
     cost?: boolean
@@ -4991,7 +5002,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type TicketsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "row" | "place" | "cost" | "time" | "hall" | "day" | "date" | "userId" | "showId" | "createdAt" | "updatedAt", ExtArgs["result"]["tickets"]>
+  export type TicketsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "row" | "place" | "cost" | "time" | "hall" | "day" | "date" | "userId" | "showId" | "createdAt" | "updatedAt", ExtArgs["result"]["tickets"]>
   export type TicketsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     show?: boolean | ShowsDefaultArgs<ExtArgs>
@@ -5013,6 +5024,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      name: string
       row: number
       place: number
       cost: number
@@ -5450,6 +5462,7 @@ export namespace Prisma {
    */
   interface TicketsFieldRefs {
     readonly id: FieldRef<"Tickets", 'String'>
+    readonly name: FieldRef<"Tickets", 'String'>
     readonly row: FieldRef<"Tickets", 'Int'>
     readonly place: FieldRef<"Tickets", 'Int'>
     readonly cost: FieldRef<"Tickets", 'Float'>
@@ -5934,6 +5947,7 @@ export namespace Prisma {
 
   export const TicketsScalarFieldEnum: {
     id: 'id',
+    name: 'name',
     row: 'row',
     place: 'place',
     cost: 'cost',
@@ -6271,6 +6285,7 @@ export namespace Prisma {
     OR?: TicketsWhereInput[]
     NOT?: TicketsWhereInput | TicketsWhereInput[]
     id?: StringFilter<"Tickets"> | string
+    name?: StringFilter<"Tickets"> | string
     row?: IntFilter<"Tickets"> | number
     place?: IntFilter<"Tickets"> | number
     cost?: FloatFilter<"Tickets"> | number
@@ -6288,6 +6303,7 @@ export namespace Prisma {
 
   export type TicketsOrderByWithRelationInput = {
     id?: SortOrder
+    name?: SortOrder
     row?: SortOrder
     place?: SortOrder
     cost?: SortOrder
@@ -6308,6 +6324,7 @@ export namespace Prisma {
     AND?: TicketsWhereInput | TicketsWhereInput[]
     OR?: TicketsWhereInput[]
     NOT?: TicketsWhereInput | TicketsWhereInput[]
+    name?: StringFilter<"Tickets"> | string
     row?: IntFilter<"Tickets"> | number
     place?: IntFilter<"Tickets"> | number
     cost?: FloatFilter<"Tickets"> | number
@@ -6325,6 +6342,7 @@ export namespace Prisma {
 
   export type TicketsOrderByWithAggregationInput = {
     id?: SortOrder
+    name?: SortOrder
     row?: SortOrder
     place?: SortOrder
     cost?: SortOrder
@@ -6348,6 +6366,7 @@ export namespace Prisma {
     OR?: TicketsScalarWhereWithAggregatesInput[]
     NOT?: TicketsScalarWhereWithAggregatesInput | TicketsScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Tickets"> | string
+    name?: StringWithAggregatesFilter<"Tickets"> | string
     row?: IntWithAggregatesFilter<"Tickets"> | number
     place?: IntWithAggregatesFilter<"Tickets"> | number
     cost?: FloatWithAggregatesFilter<"Tickets"> | number
@@ -6612,6 +6631,7 @@ export namespace Prisma {
 
   export type TicketsCreateInput = {
     id?: string
+    name?: string
     row: number
     place: number
     cost: number
@@ -6627,6 +6647,7 @@ export namespace Prisma {
 
   export type TicketsUncheckedCreateInput = {
     id?: string
+    name?: string
     row: number
     place: number
     cost: number
@@ -6642,6 +6663,7 @@ export namespace Prisma {
 
   export type TicketsUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     row?: IntFieldUpdateOperationsInput | number
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
@@ -6657,6 +6679,7 @@ export namespace Prisma {
 
   export type TicketsUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     row?: IntFieldUpdateOperationsInput | number
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
@@ -6672,6 +6695,7 @@ export namespace Prisma {
 
   export type TicketsCreateManyInput = {
     id?: string
+    name?: string
     row: number
     place: number
     cost: number
@@ -6687,6 +6711,7 @@ export namespace Prisma {
 
   export type TicketsUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     row?: IntFieldUpdateOperationsInput | number
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
@@ -6700,6 +6725,7 @@ export namespace Prisma {
 
   export type TicketsUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     row?: IntFieldUpdateOperationsInput | number
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
@@ -7005,6 +7031,7 @@ export namespace Prisma {
 
   export type TicketsCountOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
     row?: SortOrder
     place?: SortOrder
     cost?: SortOrder
@@ -7027,6 +7054,7 @@ export namespace Prisma {
 
   export type TicketsMaxOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
     row?: SortOrder
     place?: SortOrder
     cost?: SortOrder
@@ -7042,6 +7070,7 @@ export namespace Prisma {
 
   export type TicketsMinOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
     row?: SortOrder
     place?: SortOrder
     cost?: SortOrder
@@ -7426,6 +7455,7 @@ export namespace Prisma {
 
   export type TicketsCreateWithoutUserInput = {
     id?: string
+    name?: string
     row: number
     place: number
     cost: number
@@ -7440,6 +7470,7 @@ export namespace Prisma {
 
   export type TicketsUncheckedCreateWithoutUserInput = {
     id?: string
+    name?: string
     row: number
     place: number
     cost: number
@@ -7483,6 +7514,7 @@ export namespace Prisma {
     OR?: TicketsScalarWhereInput[]
     NOT?: TicketsScalarWhereInput | TicketsScalarWhereInput[]
     id?: StringFilter<"Tickets"> | string
+    name?: StringFilter<"Tickets"> | string
     row?: IntFilter<"Tickets"> | number
     place?: IntFilter<"Tickets"> | number
     cost?: FloatFilter<"Tickets"> | number
@@ -7596,6 +7628,7 @@ export namespace Prisma {
 
   export type TicketsCreateWithoutShowInput = {
     id?: string
+    name?: string
     row: number
     place: number
     cost: number
@@ -7610,6 +7643,7 @@ export namespace Prisma {
 
   export type TicketsUncheckedCreateWithoutShowInput = {
     id?: string
+    name?: string
     row: number
     place: number
     cost: number
@@ -7801,6 +7835,7 @@ export namespace Prisma {
 
   export type TicketsCreateManyUserInput = {
     id?: string
+    name?: string
     row: number
     place: number
     cost: number
@@ -7815,6 +7850,7 @@ export namespace Prisma {
 
   export type TicketsUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     row?: IntFieldUpdateOperationsInput | number
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
@@ -7829,6 +7865,7 @@ export namespace Prisma {
 
   export type TicketsUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     row?: IntFieldUpdateOperationsInput | number
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
@@ -7843,6 +7880,7 @@ export namespace Prisma {
 
   export type TicketsUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     row?: IntFieldUpdateOperationsInput | number
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
@@ -7903,6 +7941,7 @@ export namespace Prisma {
 
   export type TicketsCreateManyShowInput = {
     id?: string
+    name?: string
     row: number
     place: number
     cost: number
@@ -7917,6 +7956,7 @@ export namespace Prisma {
 
   export type TicketsUpdateWithoutShowInput = {
     id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     row?: IntFieldUpdateOperationsInput | number
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
@@ -7931,6 +7971,7 @@ export namespace Prisma {
 
   export type TicketsUncheckedUpdateWithoutShowInput = {
     id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     row?: IntFieldUpdateOperationsInput | number
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number
@@ -7945,6 +7986,7 @@ export namespace Prisma {
 
   export type TicketsUncheckedUpdateManyWithoutShowInput = {
     id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     row?: IntFieldUpdateOperationsInput | number
     place?: IntFieldUpdateOperationsInput | number
     cost?: FloatFieldUpdateOperationsInput | number

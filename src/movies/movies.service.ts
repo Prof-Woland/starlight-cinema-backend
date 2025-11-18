@@ -378,7 +378,8 @@ export class MoviesService {
                 id: ids?.movieId
             },
             select:{
-                cost: true
+                cost: true,
+                name: true
             }
         })
 
@@ -403,6 +404,7 @@ export class MoviesService {
                 time: time,
                 day: ids?.day,
                 date: ids?.date,
+                name: costs?.name,
                 hall: bookedPlaces[needTimeBook].hall,
                 cost: costs?.cost,
             });

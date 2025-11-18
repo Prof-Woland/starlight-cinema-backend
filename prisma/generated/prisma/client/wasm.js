@@ -156,6 +156,7 @@ exports.Prisma.ShowsScalarFieldEnum = {
 
 exports.Prisma.TicketsScalarFieldEnum = {
   id: 'id',
+  name: 'name',
   row: 'row',
   place: 'place',
   cost: 'cost',
