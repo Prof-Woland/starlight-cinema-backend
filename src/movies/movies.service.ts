@@ -479,6 +479,7 @@ export class MoviesService {
             },
             select:{
                 id: true,
+                name: true,
                 day: true,
                 date: true,
                 time: true,
