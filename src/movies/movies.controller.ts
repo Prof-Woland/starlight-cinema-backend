@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import { ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { OkDto, OkOneDto } from './dto/movieOk.dto';
@@ -80,5 +80,15 @@ export class MoviesController {
   @Authorization()
   async getTicketsForUser(@Authorized() user: User){
     return await this.moviesService.getTicketsForUser(user)
+  }
+
+  @ApiOperation({
+    summary: "Отмена бронирования одного билета"
+  })
+  @ApiOkResponse()
+  @Delete('tickets/undo/:id')
+  @Authorization()
+  async undoBooking(@Param('id') id: string){
+    return await this.moviesService.undoBooking(id)
   }
 }

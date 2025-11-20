@@ -511,6 +511,40 @@ export class MoviesService {
         return placesArr[needTime]
     }
 
+    async undoBooking(id: string){
+        this.logger.log("Try to unbook a ticket", this.name);
+        const ticket = await this.prismaService.tickets.findUnique({
+            where: {id}
+        });
+        if(!ticket){
+            this.logger.warn('Ticket was not found!', this.name);
+            throw new NotFoundException()
+        }
+        const show = await this.prismaService.shows.findUnique({where:{id: ticket?.showId}});
+        let freePlaces = JSON.parse(show?.places||'');
+        const needTime = freePlaces.findIndex(item => item.time === ticket?.time);
+        const row: number = ticket?.row || 0;
+        const place = ticket?.place;
+        const needRow = freePlaces[needTime].places[row];
+        const needPlace = needRow.findIndex(item => item.id === place);
+        freePlaces[needTime].places[row][needPlace].mode = "free";
+        const updateShow = await this.prismaService.shows.update({
+            where:{
+                id: ticket?.showId
+            },
+            data:{
+                places: JSON.stringify(freePlaces),
+            }
+        })
+        await this.prismaService.tickets.delete({
+            where:{
+                id
+            }
+        })
+        this.logger.log("Successful", this.name);
+        return true
+    }
+
     private necessaryData(response: any){
         const array = response;
         let moviesArray: any = [];
